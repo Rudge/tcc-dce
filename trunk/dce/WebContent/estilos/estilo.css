@@ -1,0 +1,96 @@
+@charset "iso-8859-1";
+
+body {
+	background: #CCC;
+	font: 70%/1.5em Verdana, Tahoma, arial, sans-serif;
+	color: #555; 
+	margin:0;
+}
+label {
+	padding:2px;
+	margin:6px;
+	font-weight:bold;
+	width:55PX;
+	float:left;
+}
+input {
+	padding:2px;
+	margin:7px;
+	border:1px solid #999999;
+	font: normal 1em Verdana, sans-serif;
+	color:#777;
+}
+select {
+	padding:2px;
+	margin:6px;
+	border:1px solid #999999;
+	font: normal 1em Verdana, sans-serif;
+	color:#777;
+	width:140px;
+}
+textarea {
+	width:400px;
+	padding:2px;
+	font: normal 1em Verdana, sans-serif;
+	border:1px solid #eee;
+	height:100px;
+	display:block;
+	color:#777;
+}
+input.botao { 
+	font: bold 12px Arial, Sans-serif; 
+	padding: 3px 5px; 
+	border:none;
+	color: #FFF;
+	background:  url("../imagens/bt.gif") repeat-x 0 0;
+	clear:both;
+	margin:10px;
+}
+
+#container {
+	background: #CCC url("../imagens/content.jpg") repeat-y center top;
+	width:100%; 
+	height:100%;  
+
+}
+#principal {
+	width: 560px;
+	padding: 0; 
+	margin: 10px auto;
+	width:100%;
+	height:100%;
+	text-align: center;  
+}
+#topo {
+	height: 50px;
+	background: #CCC url("../imagens/header.jpg") no-repeat center top;
+	padding: 0;	
+	color: #FFF;	
+ 
+}
+#frmLogin{
+	text-align:center;
+	width:240px;
+	height:140px;
+	margin:auto;
+}
+
+#rodape {
+	color: #C6DDEE;
+	background: #CCC url("../imagens/footer.jpg") no-repeat center top;
+	height: 60px;	
+}
+
+#titulo{
+	background:transparent none repeat scroll 0 0;
+	color:#FFFFFF;
+	font-family:'Trebuchet MS',Arial,Sans-serif;
+	font-size:24px;
+	font-weight:bolder;
+	letter-spacing:-1px;
+	height:20px;
+	text-align:center;
+	padding:25px;
+	position:static;
+}
+
