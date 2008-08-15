@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>SAE</title>
+<title>DCE</title>
 <link href="estilos/estilo.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript" src="js/autenticacao.js"></script>
 </head>
 <body>
     <div id="container">
         <div id="topo">		
-        	<div id="titulo">SAE - Sistema de Administração Escolar</div>			
+        	<div id="titulo">DCE - Diário de Classe Eletrônico</div>			
         </div>
         <div id="principal">
         	<div id="frmLogin">
@@ -20,7 +20,6 @@
                   	<label>Tipo:</label>
 					<select name="tipoUsuario">
                     	<option value="professor">Professor</option>
-                    	<option value="aluno">Aluno</option>
                     	<option value="administrador">Administrador</option>
                   	</select>
                   	<input class="botao" id="ok" type="submit" name="ok" value="OK"></input>
