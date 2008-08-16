@@ -39,8 +39,8 @@ Some prototypes:
 if(!String.trim)String.prototype.trim=function(){ return this.replace(/^\s+|\s+$/, ''); };
 var DHTMLSuite_funcs=new Object();
 if(!window.DHTML_SUITE_THEME)var DHTML_SUITE_THEME='blue';
-if(!window.DHTML_SUITE_THEME_FOLDER)var DHTML_SUITE_THEME_FOLDER='../themes/';
-if(!window.DHTML_SUITE_JS_FOLDER)var DHTML_SUITE_JS_FOLDER='../js/separateFiles/';
+if(!window.DHTML_SUITE_THEME_FOLDER)var DHTML_SUITE_THEME_FOLDER='themes/';
+if(!window.DHTML_SUITE_JS_FOLDER)var DHTML_SUITE_JS_FOLDER='js/separateFiles/';
 
 /************************************************************************************************************
 *
