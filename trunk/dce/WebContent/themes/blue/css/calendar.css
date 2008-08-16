@@ -4,6 +4,7 @@
 	width:220px;
 	position:relative;	
 	overflow:hidden;
+	margin: auto;
 	
 }
 .DHTMLSuite_calendarContent{	/* Sub div inside DHTMLSuite_calendar - this is the div where content is added */
