@@ -56,7 +56,7 @@ if(!window.DHTML_SUITE_JS_FOLDER)var DHTML_SUITE_JS_FOLDER='js/separateFiles/';
 *@public
  */
 
-var DHTMLSuite=new Object();
+DHTMLSuite=new Object();
 
 var standardObjectsCreated=false;	
 // The classes below will check this variable, if it is false, default help objects will be created
