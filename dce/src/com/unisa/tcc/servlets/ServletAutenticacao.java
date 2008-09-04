@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.unisa.tcc.form.ProfessorForm;
 import com.unisa.tcc.negocio.LembraSenha;
 import com.unisa.tcc.negocio.Login;
 import com.unisa.tcc.propriedades.Constantes;
@@ -26,13 +27,21 @@ import com.unisa.tcc.propriedades.Constantes;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		if(request.getParameter("ok").equals(Constantes.OK)){
+		if(request.getParameter("ok") != null && request.getParameter("ok").equals(Constantes.OK)){
 			Login login = new Login();
-			if(login.auntenticar()){
+			Object objeto = new Object();
+			if(request.getParameter("tipoUsuario").equals("professor")){
+				ProfessorForm professorForm = new ProfessorForm();
+				professorForm.setUsuario(request.getParameter("usuario"));
+				professorForm.setSenha(request.getParameter("senha"));
+				objeto = professorForm;
+			}else{
+				
+			}
+			if(login.autenticarUsuario(objeto)){
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/principal.jsp");
 				dispatcher.forward(request, response);
 			}
-			
 		}else{
 			LembraSenha lembra = new LembraSenha();
 			if(lembra.lembrarSenha()){
