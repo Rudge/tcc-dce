@@ -41,6 +41,9 @@ import com.unisa.tcc.propriedades.Constantes;
 			if(login.autenticarUsuario(objeto)){
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/principal.jsp");
 				dispatcher.forward(request, response);
+			}else{
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/index.jsp");
+				dispatcher.forward(request, response);
 			}
 		}else{
 			LembraSenha lembra = new LembraSenha();
