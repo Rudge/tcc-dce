@@ -3,14 +3,14 @@ package com.unisa.tcc.negocio;
 import java.sql.SQLException;
 
 import com.unisa.tcc.bean.ProfessorBean;
-import com.unisa.tcc.bo.ProfessorBo;
 import com.unisa.tcc.dao.LoginDAO;
 import com.unisa.tcc.form.ProfessorForm;
+import com.unisa.tcc.to.ProfessorTo;
 
 public class Login {
 	
 	public boolean autenticarUsuario(Object objetoUsuario){
-		ProfessorBo professorBo = new ProfessorBo();
+		ProfessorTo professorBo = new ProfessorTo();
 		ProfessorBean professorBean = new ProfessorBean();
 		LoginDAO loginDao = new LoginDAO();
 		ProfessorForm professorForm= (ProfessorForm) objetoUsuario;
