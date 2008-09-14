@@ -1,6 +1,5 @@
 package com.unisa.tcc.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,17 +9,17 @@ import com.unisa.tcc.to.ProfessorTo;
 
 public class LoginDAO extends TransactionManager {
 	
-	private Connection connection = null;
+	
 	
 	public ProfessorTo autenticarProfessor(ProfessorBean professorBean) throws SQLException{
 		StringBuffer query = new StringBuffer();
 		ProfessorTo professorBo = new ProfessorTo();
-		connection = conectar();
+		conn = conectar();
 		query.append("SELECT " +
 						   "IDPROFESSOR, NOME, LOGIN, SENHA " +
 					 "FROM PROFESSOR " +
 					 "WHERE LOGIN = ? ");
-		PreparedStatement stmt = connection.prepareStatement(query.toString());
+		PreparedStatement stmt = conn.prepareStatement(query.toString());
 		stmt.setString(1, professorBean.getUsuario());
 		ResultSet rs = stmt.executeQuery();
 		while(rs.next()){
@@ -31,7 +30,7 @@ public class LoginDAO extends TransactionManager {
 		}
 		rs.close();
 		stmt.close();
-		connection.close();		
+		conn.close();		
 		return professorBo;
 	}
 	public ProfessorBean autenticarAdministrador(ProfessorBean professorBean) throws SQLException{
