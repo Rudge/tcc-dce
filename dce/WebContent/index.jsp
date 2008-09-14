@@ -13,10 +13,10 @@
         </div>
         <div id="principal">
         	<div id="frmLogin">
-            	<form id="formLogin" name="formLogin" method="get" action="autenticar" onSubmit="return validarCampos()">
+            	<form id="formLogin" name="formLogin" method="post" action="autenticar" onSubmit="return validarCampos()">
                   	<label>Usuário:</label>
 					<input type="text" id="usuario" name="usuario" ></input>
-                  	<label>Senha:</label><input id="senha" type="password" name="senha" ></input>
+                  	<label>Senha:</label><input id="senha" type="password" name="senha"/></input>
                   	<label>Tipo:</label>
 					<select name="tipoUsuario">
                     	<option value="professor">Professor</option>

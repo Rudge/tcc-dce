@@ -1,6 +1,7 @@
 package com.unisa.tcc.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,6 +28,14 @@ import com.unisa.tcc.propriedades.Constantes;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+	}  	
+	
+	/* (non-Java-doc)
+	 * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
 		if(request.getParameter("ok") != null && request.getParameter("ok").equals(Constantes.OK)){
 			Login login = new Login();
 			Object objeto = new Object();
@@ -42,7 +51,8 @@ import com.unisa.tcc.propriedades.Constantes;
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/principal.jsp");
 				dispatcher.forward(request, response);
 			}else{
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/index.jsp");
+				request.setAttribute("erro", "Usuário e senha inválidos!");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 				dispatcher.forward(request, response);
 			}
 		}else{
@@ -51,12 +61,5 @@ import com.unisa.tcc.propriedades.Constantes;
 				
 			}
 		}
-	}  	
-	
-	/* (non-Java-doc)
-	 * @see javax.servlet.http.HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}   	  	    
 }

@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class TransactionManager {
 	
+	public static Connection conn = null;
+	
 	public static Connection conectar(){
-		Connection conn = null;
-		
 		try {
 			carregarDriver();
 			conn = obtemConexao();
