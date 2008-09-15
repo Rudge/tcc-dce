@@ -7,7 +7,7 @@
 <link href="estilos/estilo.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="estilos/demos.css" media="screen" type="text/css">
 <% 
-	String nomeProfessor = (String)request.getAttribute("erro");
+	String nomeProfessor = (String)request.getAttribute("nomeProfessor");
 %>
 <script src="js/dhtmlSuite-common.js"></script>
 <script>
@@ -22,9 +22,10 @@
         <div id="principal">
 			<form id="formCalendar" name="formCalendar">
               <input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
-			  <label>Olá, Professor <%=nomeProfessor%>.</label>
             </form>
-			<div id="calendario"></div>
+			<div id="calendario">
+				<label>Olá, Professor <%=nomeProfessor%>.</label>			
+			</div>
         </div>
     	<div id="rodape"/>	
     </div>
