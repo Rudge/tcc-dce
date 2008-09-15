@@ -8,7 +8,7 @@ import com.unisa.tcc.to.ProfessorTo;
 public class Login {
 	
 	public boolean autenticarUsuario(Object objetoUsuario){
-		ProfessorTo professorBo = new ProfessorTo();
+		ProfessorTo professorTo = new ProfessorTo();
 		ProfessorBean professorBean = new ProfessorBean();
 		LoginDAO loginDao = new LoginDAO();
 		
@@ -17,9 +17,9 @@ public class Login {
 				ProfessorForm professorForm= (ProfessorForm) objetoUsuario;
 				professorBean.setUsuario(professorForm.getUsuario());
 				professorBean.setSenha(professorForm.getSenha());
-				professorBo = loginDao.autenticarProfessor(professorBean);
-				if(professorBean.getUsuario().equals(professorBo.getUsuario()) && 
-				   professorBean.getSenha().equals(professorBo.getSenha())){
+				professorTo = loginDao.autenticarProfessor(professorBean);
+				if(professorBean.getUsuario().equals(professorTo.getUsuario()) && 
+				   professorBean.getSenha().equals(professorTo.getSenha())){
 					return true;
 				}else{
 					return false;
