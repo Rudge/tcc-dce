@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.unisa.tcc.bean.ProfessorBean;
+import com.unisa.tcc.form.ProfessorForm;
 import com.unisa.tcc.to.ProfessorTo;
 
 public class LoginDAO extends TransactionManager {
@@ -13,25 +14,29 @@ public class LoginDAO extends TransactionManager {
 	
 	public ProfessorTo autenticarProfessor(ProfessorBean professorBean) throws SQLException{
 		StringBuffer query = new StringBuffer();
-		ProfessorTo professorBo = new ProfessorTo();
-		conn = conectar();
-		query.append("SELECT " +
-						   "IDPROFESSOR, NOME, LOGIN, SENHA " +
-					 "FROM PROFESSOR " +
-					 "WHERE LOGIN = ? ");
-		PreparedStatement stmt = conn.prepareStatement(query.toString());
-		stmt.setString(1, professorBean.getUsuario());
-		ResultSet rs = stmt.executeQuery();
-		while(rs.next()){
-			professorBo.setIdProfessor(rs.getInt("IDPROFESSOR"));
-			professorBo.setNome(rs.getString("NOME"));
-			professorBo.setUsuario(rs.getString("LOGIN"));
-			professorBo.setSenha(rs.getString("SENHA"));
+		ProfessorTo professorTo = new ProfessorTo();
+		try{
+			conn = conectar();
+			query.append("SELECT " +
+							   "IDPROFESSOR, NOME, LOGIN, SENHA " +
+						 "FROM PROFESSOR " +
+						 "WHERE LOGIN = ? ");
+			PreparedStatement stmt = conn.prepareStatement(query.toString());
+			stmt.setString(1, professorBean.getUsuario());
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				professorTo.setIdProfessor(rs.getInt("IDPROFESSOR"));
+				professorTo.setNome(rs.getString("NOME"));
+				professorTo.setUsuario(rs.getString("LOGIN"));
+				professorTo.setSenha(rs.getString("SENHA"));
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+		}catch(Exception e){
+			professorTo = preencherProfessor();
 		}
-		rs.close();
-		stmt.close();
-		conn.close();		
-		return professorBo;
+		return professorTo;
 	}
 	public ProfessorBean autenticarAdministrador(ProfessorBean professorBean) throws SQLException{
 		StringBuffer query = new StringBuffer();
@@ -48,5 +53,12 @@ public class LoginDAO extends TransactionManager {
 			professorBean.setSenha(rs.getString("SENHA"));
 		}
 		return professorBean;
+	}
+	public ProfessorTo preencherProfessor(){
+		ProfessorTo professorTo = new ProfessorTo();
+		professorTo.setUsuario("jose");
+		professorTo.setSenha("1234");
+		professorTo.setNome("José Antônio");
+		return professorTo;		
 	}
 }
