@@ -7,11 +7,17 @@ body {
 	margin:0;
 }
 label {
-	padding:2px;
-	margin:6px;
+	padding:0px;
+	margin:4px;
 	font-weight:bold;
 	width:55PX;
 	float:left;
+}
+label.labelErro {
+	font-weight:bold;
+	width:250PX;
+	text-align: center;
+	color: red;
 }
 input {
 	padding:2px;
@@ -71,7 +77,7 @@ input.botao {
 #frmLogin{
 	text-align:center;
 	width:240px;
-	height:140px;
+	height:155px;
 	margin:auto;
 }
 
