@@ -47,10 +47,11 @@ import com.unisa.tcc.propriedades.Constantes;
 				
 			}
 			if(login.autenticarUsuario(objeto)){
+				request.setAttribute("nomeProfessor", "José");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/principal.jsp");
 				dispatcher.forward(request, response);
 			}else{
-				request.setAttribute("erro", "Usuário e senha inválidos!");
+				request.setAttribute("erro", "Usuário ou senha inválidos!");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 				dispatcher.forward(request, response);
 			}

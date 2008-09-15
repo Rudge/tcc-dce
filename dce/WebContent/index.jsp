@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
-<%@ page contentType="text/html; charset=utf-8" language="java"%>
+<%@ page contentType="text/html; charset=ISO-8859-1" language="java"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -8,21 +8,21 @@
 <script language="JavaScript" src="js/autenticacao.js"></script>
 <% 
 	String msgErro = "";
-	if(request.getParameter("erro") != null){
-		msgErro = request.getParameter("erro");
+	if(request.getAttribute("erro") != null){
+		msgErro = (String)request.getAttribute("erro");
 	}
 %>
 </head>
 <body>
     <div id="container">
         <div id="topo">		
-        	<div id="titulo">DCE - DiÃ¡rio de Classe EletrÃ´nico</div>			
+        	<div id="titulo">DCE - Diário de Classe Eletrônico</div>			
         </div>
         <div id="principal">
         	<div id="frmLogin">
             	<form id="formLogin" name="formLogin" method="post" action="autenticar" onSubmit="return validarCampos()">
-					<input id="msgErro" />
-                  	<label>UsuÃ¡rio:</label>
+					<label class="labelErro"><%=msgErro%></label>
+                  	<label>Usuário:</label>
 					<input type="text" id="usuario" name="usuario" />
                   	<label>Senha:</label><input id="senha" type="password" name="senha"/>
                   	<label>Tipo:</label>
