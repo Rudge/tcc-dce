@@ -47,7 +47,7 @@ import com.unisa.tcc.propriedades.Constantes;
 				
 			}
 			if(login.autenticarUsuario(objeto)){
-				request.setAttribute("nomeProfessor", "José");
+				request.setAttribute("nomeProfessor", "José Antônio");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/principal.jsp");
 				dispatcher.forward(request, response);
 			}else{
