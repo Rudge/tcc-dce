@@ -84,7 +84,7 @@ input.botao {
 #rodape {
 	color: #C6DDEE;
 	background: #CCC url("../imagens/footer.jpg") no-repeat center top;
-	height: 60px;	
+	height: 50px;	
 }
 
 #titulo{
@@ -97,6 +97,6 @@ input.botao {
 	height:20px;
 	text-align:center;
 	padding:25px;
-	position:static;
+	position:fixed;
 }
 
