@@ -9,8 +9,8 @@
 <% 
 	String nomeProfessor = (String)request.getAttribute("nomeProfessor");
 %>
-<script src="js/dhtmlSuite-common.js"></script>
-<script>
+<script type="text/javascript" src="js/dhtmlSuite-common.js"></script>
+<script type="text/javascript">
 	DHTMLSuite.include("calendar");
 </script>
 </head>
@@ -21,40 +21,37 @@
         </div>
         <div id="principal">
 			<form id="formCalendar" name="formCalendar">
-              <input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
+            	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
+				Olá, Professor <%=nomeProfessor%>.
             </form>
 			<div id="calendario">
-				<label>Olá, Professor <%=nomeProfessor%>.</label>			
 			</div>
         </div>
-    	<div id="rodape"/>	
-    </div>
+    	<div id="rodape">
+		</div>	
+	<script type="text/javascript">	
+		var moldeCalendar = new DHTMLSuite.calendarModel();
+		moldeCalendar.setLanguageCode('pt-br')
+		var calendarioObj = new DHTMLSuite.calendar({minuteDropDownInterval:10,numberOfRowsInHourDropDown:5,callbackFunctionOnDayClick:'getDataCalendario',isDragable:false,displayTimeBar:false});
+		calendarioObj.setCalendarModelReference(moldeCalendar);
+		function carregarCalendario()
+		{
+			var date = new Date();
+			var dataAtual = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+			document.getElementById("dataEscolhida").value = dataAtual;
+			calendarioObj.addHtmlElementReference('dataEscolhida',document.formCalendar.dataEscolhida);
+			calendarioObj.setDisplayCloseButton(false);
+			if(!calendarioObj.isVisible()){
+				calendarioObj.setTargetReference('calendario');
+				calendarioObj.display();
+			}		
+		}	
+		function getDataCalendario(inputArray)
+		{
+			var referencia = calendarioObj.getHtmlElementReferences();
+			referencia.dataEscolhida.value = inputArray.day + '-' + inputArray.month + '-' + inputArray.year;
+		}	
+		window.onload = carregarCalendario;
+	</script>
 </body>
-<script>
-	var moldeCalendar = new DHTMLSuite.calendarModel();
-	moldeCalendar.setLanguageCode('pt-br')
-	var calendarioObj = new DHTMLSuite.calendar({minuteDropDownInterval:10,numberOfRowsInHourDropDown:5,callbackFunctionOnDayClick:'getDataCalendario',isDragable:false,displayTimeBar:false});
-	calendarioObj.setCalendarModelReference(moldeCalendar);
-	
-	function carregarCalendario()
-	{
-		var date = new Date();
-		var dataAtual = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
-		document.getElementById("dataEscolhida").value = dataAtual;
-		calendarioObj.addHtmlElementReference('dataEscolhida',document.formCalendar.dataEscolhida);
-		calendarioObj.setDisplayCloseButton(false);
-		if(!calendarioObj.isVisible()){
-			calendarioObj.setTargetReference('calendario');
-			calendarioObj.display();
-		}		
-	}	
-	function getDataCalendario(inputArray)
-	{
-		var referencia = calendarioObj.getHtmlElementReferences();
-		referencia.dataEscolhida.value = inputArray.day + '-' + inputArray.month + '-' + inputArray.year;
-	}	
-</script>
-<script type="text/javascript">
-	carregarCalendario();
-</script>
 </html>
