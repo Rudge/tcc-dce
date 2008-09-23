@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.unisa.tcc.bean.ProfessorBean;
-import com.unisa.tcc.form.ProfessorForm;
 import com.unisa.tcc.to.ProfessorTo;
 
 public class LoginDAO extends TransactionManager {
