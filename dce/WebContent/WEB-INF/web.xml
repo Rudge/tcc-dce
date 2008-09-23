@@ -5,16 +5,8 @@
 		<display-name>ServletAutenticar</display-name>
 		<servlet-name>ServletAutenticar</servlet-name>
 		<servlet-class>com.unisa.tcc.servlets.ServletAutenticacao</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
-	<servlet>
-		<display-name>ServletInicial</display-name>
-		<servlet-name>ServletInicial</servlet-name>
-		<servlet-class>com.unisa.tcc.servlets.inicial</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServletInicial</servlet-name>
-		<url-pattern>/inicial</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ServletAutenticar</servlet-name>
 		<url-pattern>/autenticar</url-pattern>
@@ -26,4 +18,7 @@
 		<error-code>404</error-code>
 		<location>/webpages/error404.jsp</location>
 	</error-page>
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
 </web-app>
