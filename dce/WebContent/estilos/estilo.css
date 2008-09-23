@@ -97,6 +97,6 @@ input.botao {
 	height:20px;
 	text-align:center;
 	padding:25px;
-	position:fixed;
+	position:static;
 }
 
