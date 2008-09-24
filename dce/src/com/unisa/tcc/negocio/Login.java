@@ -5,7 +5,7 @@ import com.unisa.tcc.dao.LoginDAO;
 import com.unisa.tcc.form.ProfessorForm;
 import com.unisa.tcc.to.ProfessorTo;
 
-public class Login {
+public class Login{
 	
 	public boolean autenticarUsuario(Object objetoUsuario){
 		ProfessorTo professorTo = new ProfessorTo();
