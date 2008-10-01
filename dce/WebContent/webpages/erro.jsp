@@ -12,7 +12,7 @@
         	<div id="titulo">DCE - Diário de Classe Eletrônico</div>			
         </div>
         <div id="principal">
-        	ERRO 404 - Página não encontrada. 
+        	
         </div>
         <div id="rodape"/>	
     </div>
