@@ -24,7 +24,7 @@ public class LoginDAO extends TransactionManager {
 			stmt.setString(1, professorBean.getUsuario());
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
-				professorTo.setIdProfessor(rs.getInt("IDPROFESSOR"));
+				professorTo.setId(rs.getInt("IDPROFESSOR"));
 				professorTo.setNome(rs.getString("NOME"));
 				professorTo.setUsuario(rs.getString("LOGIN"));
 				professorTo.setSenha(rs.getString("SENHA"));
@@ -47,7 +47,7 @@ public class LoginDAO extends TransactionManager {
 		stmt.setString(1, professorBean.getUsuario());
 		ResultSet rs = stmt.executeQuery(query.toString());
 		while(rs.next()){
-			professorBean.setIdProfessor(rs.getInt("IDPROFESSOR"));
+			professorBean.setId(rs.getInt("IDPROFESSOR"));
 			professorBean.setNome(rs.getString("NOME"));
 			professorBean.setSenha(rs.getString("SENHA"));
 		}
