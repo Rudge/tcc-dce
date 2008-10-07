@@ -1,30 +1,24 @@
 package com.unisa.tcc.bean;
 
-import java.sql.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ChamadaBean {
-	private ProfessorBean professor;
 	private List<AlunoBean> listaAlunos;
-	private Date date;
+	private GregorianCalendar data;
 	private DisciplinaBean disciplina;
-	public ProfessorBean getProfessor() {
-		return professor;
-	}
-	public void setProfessor(ProfessorBean professor) {
-		this.professor = professor;
-	}
+	
 	public List<AlunoBean> getListaAlunos() {
 		return listaAlunos;
 	}
 	public void setListaAlunos(List<AlunoBean> listaAlunos) {
 		this.listaAlunos = listaAlunos;
 	}
-	public Date getDate() {
-		return date;
+	public GregorianCalendar getData() {
+		return data;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setData(GregorianCalendar data) {
+		this.data = data;
 	}
 	public DisciplinaBean getDisciplina() {
 		return disciplina;

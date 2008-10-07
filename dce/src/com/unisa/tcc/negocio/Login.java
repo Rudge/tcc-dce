@@ -27,4 +27,8 @@ public class Login{
 			return false;
 		}
 	}
+	
+	public boolean lembrarSenha() {
+		return false;
+	}
 }
