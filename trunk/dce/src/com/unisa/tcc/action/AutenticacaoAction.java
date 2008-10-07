@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.unisa.tcc.form.ProfessorForm;
-import com.unisa.tcc.negocio.LembraSenha;
 import com.unisa.tcc.negocio.Login;
 import com.unisa.tcc.propriedades.Constantes;
 
@@ -16,8 +15,8 @@ import com.unisa.tcc.propriedades.Constantes;
 	public void executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		
+		Login login = new Login();
 		if(request.getParameter("ok") != null && request.getParameter("ok").equals(Constantes.OK)){
-			Login login = new Login();
 			boolean autenticado = false;
 			ProfessorForm professorForm = new ProfessorForm();
 			if(request.getParameter("tipoUsuario").equals("professor")){
@@ -37,10 +36,10 @@ import com.unisa.tcc.propriedades.Constantes;
 				dispatcher.forward(request, response);
 			}
 		}else{
-			LembraSenha lembra = new LembraSenha();
-			if(lembra.lembrarSenha()){
+			if(login.lembrarSenha()){
 				
 			}
+
 		}
 	}   
 }
