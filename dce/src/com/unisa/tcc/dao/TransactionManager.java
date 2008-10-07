@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class TransactionManager {
 	
-	public static Connection conn = null;
+	protected static Connection conn = null;
 	
-	public static Connection conectar(){
+	protected static Connection getConn(){
 		try {
 			carregarDriver();
 			conn = obtemConexao();
@@ -29,4 +29,5 @@ public class TransactionManager {
 		//return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","system");
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/tcc", "root", "root");
 	}
+	
 }

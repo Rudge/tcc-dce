@@ -9,13 +9,11 @@ import com.unisa.tcc.to.ProfessorTo;
 
 public class LoginDAO extends TransactionManager {
 	
-	
-	
 	public ProfessorTo autenticarProfessor(ProfessorBean professorBean) throws SQLException{
 		StringBuffer query = new StringBuffer();
 		ProfessorTo professorTo = new ProfessorTo();
 		try{
-			conn = conectar();
+			conn = getConn();
 			query.append("SELECT " +
 							   "IDPROFESSOR, NOME, LOGIN, SENHA " +
 						 "FROM PROFESSOR " +
@@ -37,13 +35,14 @@ public class LoginDAO extends TransactionManager {
 		}
 		return professorTo;
 	}
+	
 	public ProfessorBean autenticarAdministrador(ProfessorBean professorBean) throws SQLException{
 		StringBuffer query = new StringBuffer();
 		query.append("SELECT " +
 						   "IDPROFESSOR, NOME, LOGIN, SENHA " +
 					 "FROM PROFESSOR " +
 					 "WHERE LOGIN = ? ");
-		PreparedStatement stmt = conectar().prepareStatement(query.toString());
+		PreparedStatement stmt = getConn().prepareStatement(query.toString());
 		stmt.setString(1, professorBean.getUsuario());
 		ResultSet rs = stmt.executeQuery(query.toString());
 		while(rs.next()){
@@ -57,7 +56,7 @@ public class LoginDAO extends TransactionManager {
 		ProfessorTo professorTo = new ProfessorTo();
 		professorTo.setUsuario("jose");
 		professorTo.setSenha("1234");
-		professorTo.setNome("José Antônio");
+		professorTo.setNome("José Antônio Silva");
 		return professorTo;		
 	}
 }
