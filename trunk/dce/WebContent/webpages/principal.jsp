@@ -1,13 +1,14 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<%@page import="com.unisa.tcc.form.ProfessorForm"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>DCE</title>
 <link href="estilos/estilo.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="estilos/demos.css" media="screen" type="text/css">
 <% 
-	String nomeProfessor = (String)request.getAttribute("nomeProfessor");
+	ProfessorForm professor = (ProfessorForm)session.getAttribute("usuario");
 %>
 <script type="text/javascript" src="js/dhtmlSuite-common.js"></script>
 <script type="text/javascript">
@@ -22,7 +23,7 @@
         <div id="principal">
 			<form id="formCalendar" name="formCalendar">
             	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
-				Olá, Professor <%=nomeProfessor%>.
+				Olá, Professor <%=professor.getNome()%>.
             </form>
 			<div id="calendario">
 			</div>

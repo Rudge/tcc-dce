@@ -7,23 +7,19 @@ import com.unisa.tcc.to.ProfessorTo;
 
 public class Login{
 	
-	public boolean autenticarUsuario(Object objetoUsuario){
+	public boolean autenticarProfessor(ProfessorForm professorForm){
 		ProfessorTo professorTo = new ProfessorTo();
 		ProfessorBean professorBean = new ProfessorBean();
 		LoginDAO loginDao = new LoginDAO();
-		
 		try{
-			if(objetoUsuario instanceof ProfessorForm){
-				ProfessorForm professorForm= (ProfessorForm) objetoUsuario;
-				professorBean.setUsuario(professorForm.getUsuario());
-				professorBean.setSenha(professorForm.getSenha());
-				professorTo = loginDao.autenticarProfessor(professorBean);
-				if(professorBean.getUsuario().equals(professorTo.getUsuario()) && 
-				   professorBean.getSenha().equals(professorTo.getSenha())){
+			professorBean.setUsuario(professorForm.getUsuario());
+			professorBean.setSenha(professorForm.getSenha());
+			professorTo = loginDao.autenticarProfessor(professorBean);
+			if(professorBean.getUsuario().equals(professorTo.getUsuario()) && 
+			   professorBean.getSenha().equals(professorTo.getSenha())){
+					professorForm.setId(professorTo.getId());
+					professorForm.setNome(professorTo.getNome());
 					return true;
-				}else{
-					return false;
-				}
 			}else{
 				return false;
 			}

@@ -18,17 +18,17 @@ import com.unisa.tcc.propriedades.Constantes;
 		
 		if(request.getParameter("ok") != null && request.getParameter("ok").equals(Constantes.OK)){
 			Login login = new Login();
-			Object objeto = new Object();
+			boolean autenticado = false;
+			ProfessorForm professorForm = new ProfessorForm();
 			if(request.getParameter("tipoUsuario").equals("professor")){
-				ProfessorForm professorForm = new ProfessorForm();
 				professorForm.setUsuario(request.getParameter("usuario"));
 				professorForm.setSenha(request.getParameter("senha"));
-				objeto = professorForm;
+				autenticado = login.autenticarProfessor(professorForm);
 			}else{
 				
 			}
-			if(login.autenticarUsuario(objeto)){
-				request.setAttribute("nomeProfessor", "José Antônio");
+			if(autenticado){
+				request.getSession().setAttribute("usuario", professorForm);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/principal.jsp");
 				dispatcher.forward(request, response);
 			}else{
