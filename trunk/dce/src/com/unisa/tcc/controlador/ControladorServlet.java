@@ -16,22 +16,22 @@ public class ControladorServlet extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 2443729024091269603L;
 
-	public void service(HttpServletRequest request, HttpServletResponse response)
+	public void service(HttpServletRequest request, HttpServletResponse response) 
 	throws ServletException, IOException {
 		
-		String acaoClasseNome = Constantes.URL_ACTION + request.getParameter("acao");
+		String acaoNomeClasse = Constantes.URL_ACTION + request.getParameter("acao");
 		Class<?> acaoClasse = null;
-		InterfaceActionNegocio actionNegocioObject = null;
-		
+		InterfaceActionNegocio actionNegocioObjeto = null;
+
 		try {
-			acaoClasse = Class.forName(acaoClasseNome);
+			acaoClasse = Class.forName(acaoNomeClasse);
 			
 			if (!InterfaceActionNegocio.class.isAssignableFrom(acaoClasse)) {
 				throw new ServletException("classe não implementa a interface: " + acaoClasse);
 			}
-			actionNegocioObject = (InterfaceActionNegocio) acaoClasse.newInstance();
+			actionNegocioObjeto = (InterfaceActionNegocio) acaoClasse.newInstance();
 			
-			actionNegocioObject.executar(request, response);
+			actionNegocioObjeto.executar(request, response);
 			
 		} catch (ClassNotFoundException e) {
 			throw new ServletException("Não encontro a classe " + acaoClasse);
