@@ -12,7 +12,7 @@
         	<div id="titulo">DCE - Diário de Classe Eletrônico</div>			
         </div>
         <div id="principal">
-        	
+        	<a href="javascript:history.go(-1)">Voltar</a>
         </div>
         <div id="rodape"/>	
     </div>
