@@ -5,11 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.unisa.tcc.bean.ProfessorBean;
+import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.ProfessorTo;
 
 public class LoginDAO extends TransactionManager {
 	
-	public ProfessorTo autenticarProfessor(ProfessorBean professorBean) throws SQLException{
+	public ProfessorTo autenticarProfessor(ProfessorBean professorBean) throws DceException{
 		StringBuffer query = new StringBuffer();
 		ProfessorTo professorTo = new ProfessorTo();
 		try{
@@ -52,6 +53,7 @@ public class LoginDAO extends TransactionManager {
 		}
 		return professorBean;
 	}
+	
 	public ProfessorTo preencherProfessor(){
 		ProfessorTo professorTo = new ProfessorTo();
 		professorTo.setUsuario("jose");
