@@ -3,11 +3,12 @@ package com.unisa.tcc.negocio;
 import com.unisa.tcc.bean.ProfessorBean;
 import com.unisa.tcc.dao.LoginDAO;
 import com.unisa.tcc.form.ProfessorForm;
+import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.ProfessorTo;
 
 public class Login{
 	
-	public boolean autenticarProfessor(ProfessorForm professorForm){
+	public boolean autenticarProfessor(ProfessorForm professorForm) throws DceException{
 		ProfessorTo professorTo = new ProfessorTo();
 		ProfessorBean professorBean = new ProfessorBean();
 		LoginDAO loginDao = new LoginDAO();
@@ -28,7 +29,7 @@ public class Login{
 		}
 	}
 	
-	public boolean lembrarSenha() {
+	public boolean lembrarSenha() throws DceException {
 		return false;
 	}
 }
