@@ -19,13 +19,16 @@ public class ControladorChamadasDAO extends TransactionManager{
 		StringBuffer query = new StringBuffer();
 		try{
 			conn = getConn();
-			query.append("SELECT " +
-					   	 	" * " +
-					   	 "FROM LISTAPRESENCA, DISCIPLINA, CLASSE " +
-				 		 "WHERE IDPROFESSOR = ? AND DATE = ?");
+			query.append("SELECT DISC.NOME AS DISCIPLINA, CL.SERIE_SERIE, CL.SERIE_TURMA, CL.DESCRICAO_SALA " +
+						 "FROM CHAMADA CH, CLASSE_CHAMADA CLCH, CLASSE CL, DISCIPLINAS DISC " +
+						 "WHERE CH.DATA_CHAMADA = ? " + 
+						 "AND DISC.PROFESSOR_IDPROFESSOR = ? " +
+						 "AND CH.DISCIPLINAS_IDDISCIPLINA = DISC.IDDISCIPLINA " +
+						 "AND CL.IDCLASSE = CLCH.CLASSE_IDCLASSE " +
+						 "AND DISC.IDDISCIPLINA = CH.DISCIPLINAS_IDDISCIPLINA ");
 			PreparedStatement stmt = conn.prepareStatement(query.toString());
-			stmt.setInt(1, idProfessor);
-			stmt.setDate(2, new Date(data.getGregorianChange().getTime()));
+			stmt.setDate(1, new Date(data.getGregorianChange().getTime()));
+			stmt.setInt(2, idProfessor);
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				DisciplinaBean disciplina = new DisciplinaBean();
