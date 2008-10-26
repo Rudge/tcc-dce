@@ -35,10 +35,6 @@ public class ControladorServlet extends HttpServlet {
 			
 		} catch (ClassNotFoundException e) {
 			throw new ServletException("Não encontro a classe " + acaoClasse);
-		}catch (InstantiationException e) {
-			throw new ServletException(e);
-		}catch (IllegalAccessException e) {
-			throw new ServletException(e);
 		}catch (Exception e) {
 			throw new ServletException("A lógica de negócios causou uma exceção", e);
 		}
