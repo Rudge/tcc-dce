@@ -7,7 +7,14 @@ public class ChamadaBean {
 	private List<AlunoBean> listaAlunos;
 	private GregorianCalendar data;
 	private DisciplinaBean disciplina;
+	private ClasseBean classe;
 	
+	public ClasseBean getClasse() {
+		return classe;
+	}
+	public void setClasse(ClasseBean classe) {
+		this.classe = classe;
+	}
 	public List<AlunoBean> getListaAlunos() {
 		return listaAlunos;
 	}
