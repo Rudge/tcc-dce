@@ -43,7 +43,7 @@ import com.unisa.tcc.propriedades.DceException;
 	
 			}
 		}catch (Exception e) {
-			throw new DceException("Erro na requisição ou resposta da página!", e);
+			throw new DceException("Erro na requisição ou resposta da página de login!");
 		}
 	}   
 }

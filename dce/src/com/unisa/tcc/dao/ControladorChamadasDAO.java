@@ -8,12 +8,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.unisa.tcc.bean.ChamadaBean;
+import com.unisa.tcc.bean.ClasseBean;
 import com.unisa.tcc.bean.DisciplinaBean;
-import com.unisa.tcc.bean.ProfessorBean;
+import com.unisa.tcc.propriedades.DceException;
 
 public class ControladorChamadasDAO extends TransactionManager{
 
-	public List<ChamadaBean> consultarChamada(int idProfessor, GregorianCalendar data){
+	public List<ChamadaBean> consultarChamadasPorData(int idProfessor, GregorianCalendar data) throws DceException{
 		List<ChamadaBean> listaChamadas= new ArrayList<ChamadaBean>();
 		ChamadaBean chamadaBean = new ChamadaBean();
 		StringBuffer query = new StringBuffer();
@@ -32,20 +33,21 @@ public class ControladorChamadasDAO extends TransactionManager{
 			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				DisciplinaBean disciplina = new DisciplinaBean();
-				ProfessorBean professor = new ProfessorBean();
+				ClasseBean classe = new ClasseBean();
 				disciplina.setNome(rs.getString("DISCIPLINA"));
-				disciplina.setProfessor(professor);
+				classe.setSerie(rs.getInt("SERIE_SERIE"));
+				classe.setTurma(rs.getString("SERIE_TURMA").charAt(0));
+				classe.setDescricaoSala(rs.getString("DESCRICAO_SALA"));
+				chamadaBean.setClasse(classe);
 				chamadaBean.setDisciplina(disciplina);
-				chamadaBean.setData(data);
 				listaChamadas.add(chamadaBean);
 			}
 			rs.close();
 			stmt.close();
 			conn.close();
 		}catch (Exception e) {
-			
+			throw new DceException("Erro na consulta das chamadas por data!");
 		}
-		
 		return listaChamadas;
 	}
 }
