@@ -1,18 +1,19 @@
 package com.unisa.tcc.to;
 
-import java.sql.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ChamadaTo {
-	private ProfessorTo professor;
 	private List<AlunoTo> listaAlunos;
-	private Date date;
+	private GregorianCalendar data;
 	private DisciplinaTo disciplina;
-	public ProfessorTo getProfessor() {
-		return professor;
+	private ClasseTo classe;
+	
+	public ClasseTo getClasse() {
+		return classe;
 	}
-	public void setProfessor(ProfessorTo professor) {
-		this.professor = professor;
+	public void setClasse(ClasseTo classe) {
+		this.classe = classe;
 	}
 	public List<AlunoTo> getListaAlunos() {
 		return listaAlunos;
@@ -20,11 +21,11 @@ public class ChamadaTo {
 	public void setListaAlunos(List<AlunoTo> listaAlunos) {
 		this.listaAlunos = listaAlunos;
 	}
-	public Date getDate() {
-		return date;
+	public GregorianCalendar getData() {
+		return data;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setData(GregorianCalendar data) {
+		this.data = data;
 	}
 	public DisciplinaTo getDisciplina() {
 		return disciplina;
