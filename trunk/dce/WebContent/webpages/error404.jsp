@@ -8,8 +8,7 @@
 </head>
 <body>
     <div id="container">
-        <div id="topo">		
-        	<div id="titulo">DCE - Diário de Classe Eletrônico</div>			
+        <div id="topo">				
         </div>
         <div id="principal">
 			ERRO 404 - Página não encontrada.

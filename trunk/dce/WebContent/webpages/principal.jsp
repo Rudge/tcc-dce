@@ -17,8 +17,7 @@
 </head>
 <body>
     <div id="container">
-        <div id="topo">		
-        	<div id="titulo">DCE - Diário de Classe Eletrônico</div>			
+        <div id="topo">				
         </div>
         <div id="principal">
 			<form id="formCalendar" name="formCalendar">
@@ -38,7 +37,7 @@
 		function carregarCalendario()
 		{
 			var date = new Date();
-			var dataAtual = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+			var dataAtual = date.getDate()  + '/' + (date.getMonth()+1) + '/' + date.getFullYear();
 			document.getElementById("dataEscolhida").value = dataAtual;
 			calendarioObj.addHtmlElementReference('dataEscolhida',document.formCalendar.dataEscolhida);
 			calendarioObj.setDisplayCloseButton(false);
@@ -50,7 +49,7 @@
 		function getDataCalendario(inputArray)
 		{
 			var referencia = calendarioObj.getHtmlElementReferences();
-			referencia.dataEscolhida.value = inputArray.day + '-' + inputArray.month + '-' + inputArray.year;
+			referencia.dataEscolhida.value = inputArray.day + '/' + inputArray.month + '/' + inputArray.year;
 		}	
 		window.onload = carregarCalendario;
 	</script>
