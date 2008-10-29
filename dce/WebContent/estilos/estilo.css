@@ -68,7 +68,7 @@ input.botao {
 	text-align: center;  
 }
 #topo {
-	height: 50px;
+	height: 65px;
 	background: #CCC url("../imagens/header.jpg") no-repeat center top;
 	padding: 0;	
 	color: #FFF;	
@@ -85,18 +85,5 @@ input.botao {
 	color: #C6DDEE;
 	background: #CCC url("../imagens/footer.jpg") no-repeat center top;
 	height: 50px;	
-}
-
-#titulo{
-	background:transparent none repeat scroll 0 0;
-	color:#FFFFFF;
-	font-family:'Trebuchet MS',Arial,Sans-serif;
-	font-size:24px;
-	font-weight:bolder;
-	letter-spacing:-1px;
-	height:20px;
-	text-align:center;
-	padding:25px;
-	position:static;
 }
 

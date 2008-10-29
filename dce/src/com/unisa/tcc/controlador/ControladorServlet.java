@@ -2,6 +2,7 @@ package com.unisa.tcc.controlador;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.unisa.tcc.action.InterfaceActionNegocio;
 import com.unisa.tcc.propriedades.Constantes;
+import com.unisa.tcc.propriedades.DceException;
 
 public class ControladorServlet extends HttpServlet {
 	/**
@@ -34,9 +36,15 @@ public class ControladorServlet extends HttpServlet {
 			actionNegocioObjeto.executar(request, response);
 			
 		} catch (ClassNotFoundException e) {
+			request.setAttribute("mensagemErro", "Não encontro a classe " + acaoClasse);
 			throw new ServletException("Não encontro a classe " + acaoClasse);
+		}catch (DceException e){
+			request.setAttribute("mensagemErro", e.getMessage());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/erro.jsp");
+			dispatcher.forward(request, response);
 		}catch (Exception e) {
-			throw new ServletException("A lógica de negócios causou uma exceção", e);
+			request.setAttribute("mensagemErro", "A lógica de negócios causou uma exceção");
+			throw new ServletException("A lógica de negócios causou uma exceção");
 		}
 	}
 }

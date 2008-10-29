@@ -4,18 +4,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.unisa.tcc.propriedades.DceException;
+
 public class TransactionManager {
 	
 	protected static Connection conn = null;
 	
-	protected static Connection getConn(){
+	protected static Connection getConn() throws DceException{
 		try {
 			carregarDriver();
 			conn = obtemConexao();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw new DceException("Erro ao carregar o driver do Mysql!");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DceException("Erro na obtenção da conexão com o banco!");
 		}
 		return conn;
 	}

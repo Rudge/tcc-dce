@@ -1,18 +1,19 @@
 package com.unisa.tcc.form;
 
-import java.sql.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ChamadaForm {
-	private ProfessorForm professor;
 	private List<AlunoForm> listaAlunos;
-	private Date date;
+	private GregorianCalendar data;
 	private DisciplinaForm disciplina;
-	public ProfessorForm getProfessor() {
-		return professor;
+	private ClasseForm classe;
+	
+	public ClasseForm getClasse() {
+		return classe;
 	}
-	public void setProfessor(ProfessorForm professor) {
-		this.professor = professor;
+	public void setClasse(ClasseForm classe) {
+		this.classe = classe;
 	}
 	public List<AlunoForm> getListaAlunos() {
 		return listaAlunos;
@@ -20,11 +21,11 @@ public class ChamadaForm {
 	public void setListaAlunos(List<AlunoForm> listaAlunos) {
 		this.listaAlunos = listaAlunos;
 	}
-	public Date getDate() {
-		return date;
+	public GregorianCalendar getData() {
+		return data;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setData(GregorianCalendar data) {
+		this.data = data;
 	}
 	public DisciplinaForm getDisciplina() {
 		return disciplina;

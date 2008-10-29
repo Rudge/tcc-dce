@@ -1,14 +1,21 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <%@ page contentType="text/html; charset=ISO-8859-1" language="java"%>
 
-<%@page import="com.unisa.tcc.form.ProfessorForm"%><html xmlns="http://www.w3.org/1999/xhtml">
+<%@page import="com.unisa.tcc.form.ProfessorForm"%>
+<%@page import="java.util.List"%>
+<%@page import="com.unisa.tcc.form.ChamadaForm"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>DCE</title>
 <link href="estilos/estilo.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="estilos/demos.css" media="screen" type="text/css">
 <% 
+	List<ChamadaForm> listaChamadas = null;
 	ProfessorForm professor = (ProfessorForm)session.getAttribute("usuario");
+	if(request.getAttribute("listaChamadas") != null){
+		listaChamadas = (List<ChamadaForm>)request.getAttribute("listaChamadas");
+	}
 %>
 <script type="text/javascript" src="js/dhtmlSuite-common.js"></script>
 <script type="text/javascript">
@@ -20,12 +27,21 @@
         <div id="topo">				
         </div>
         <div id="principal">
-			<form id="formCalendar" name="formCalendar">
+			<form id="formCalendar" name="formCalendar" method="post" action="dce.do">
             	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
+				<input type="hidden" name="acao" value=""/>
 				Olá, Professor <%=professor.getNome()%>.
-            </form>
-			<div id="calendario">
-			</div>
+				<div id="calendario">
+				</div>
+				<%
+					if(listaChamadas != null){
+						for (ChamadaForm chamada : listaChamadas) {
+							out.println("<a href=\"\" >" + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
+										"º" + chamada.getClasse().getTurma() + " - " + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>"); 
+						}
+					}
+				%>
+			</form>
         </div>
     	<div id="rodape">
 		</div>	
@@ -44,12 +60,14 @@
 			if(!calendarioObj.isVisible()){
 				calendarioObj.setTargetReference('calendario');
 				calendarioObj.display();
-			}		
+			}
 		}	
 		function getDataCalendario(inputArray)
 		{
 			var referencia = calendarioObj.getHtmlElementReferences();
 			referencia.dataEscolhida.value = inputArray.day + '/' + inputArray.month + '/' + inputArray.year;
+			document.getElementById("formCalendar").acao.value = "ConsultaChamadaAction";
+			document.formCalendar.submit();
 		}	
 		window.onload = carregarCalendario;
 	</script>
