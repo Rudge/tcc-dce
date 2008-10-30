@@ -7,8 +7,8 @@
 <script language="JavaScript" src="js/autenticacao.js"></script>
 <% 
 	String msgErro = "";
-	if(request.getAttribute("erro") != null){
-		msgErro = (String)request.getAttribute("erro");
+	if(request.getAttribute("msgErro") != null){
+		msgErro = (String)request.getAttribute("msgErro");
 	}
 %>
 </head>

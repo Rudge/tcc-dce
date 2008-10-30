@@ -4,11 +4,19 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ChamadaTo {
+	
+	private int id;
 	private List<AlunoTo> listaAlunos;
 	private GregorianCalendar data;
 	private DisciplinaTo disciplina;
 	private ClasseTo classe;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public ClasseTo getClasse() {
 		return classe;
 	}

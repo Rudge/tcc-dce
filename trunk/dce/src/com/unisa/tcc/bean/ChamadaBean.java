@@ -4,11 +4,19 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ChamadaBean {
+	
+	private int id;
 	private List<AlunoBean> listaAlunos;
 	private GregorianCalendar data;
 	private DisciplinaBean disciplina;
 	private ClasseBean classe;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public ClasseBean getClasse() {
 		return classe;
 	}

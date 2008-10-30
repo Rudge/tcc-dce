@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%
-	String erro = (String) request.getAttribute("mensagemErro");
+	String erro = (String) request.getAttribute("msgErro");
 	if (erro == null || erro.equals("")) {
     	erro = "Erro ao realizar operação. Por favor contacte o suporte.";
     }
