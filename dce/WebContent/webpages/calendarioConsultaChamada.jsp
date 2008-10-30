@@ -34,9 +34,10 @@
 				<div id="calendario">
 				</div>
 				<%
-					if(listaChamadas != null){
+					if(listaChamadas != null && !listaChamadas.isEmpty()){
+						out.println("<BR>Aulas: <BR>");
 						for (ChamadaForm chamada : listaChamadas) {
-							out.println("<a href=\"\" >" + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
+							out.println("<a href=\"\" onclick=\"escolherChamada(" + chamada.getId() + ") >" + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
 										"º" + chamada.getClasse().getTurma() + " - " + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>"); 
 						}
 					}

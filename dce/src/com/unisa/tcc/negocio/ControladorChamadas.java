@@ -32,6 +32,7 @@ public class ControladorChamadas {
 				classe.setSerie(chamadaBean.getClasse().getSerie());
 				classe.setTurma(chamadaBean.getClasse().getTurma());
 				classe.setDescricaoSala(chamadaBean.getClasse().getDescricaoSala());
+				chamadaTo.setId(chamadaBean.getId());
 				chamadaTo.setClasse(classe);
 				chamadaTo.setDisciplina(disciplina);
 				listaChamadasTo.add(chamadaTo);

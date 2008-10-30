@@ -34,13 +34,14 @@ public class ConsultaChamadaAction implements InterfaceActionNegocio{
 				classe.setSerie(chamadaTo.getClasse().getSerie());
 				classe.setTurma(chamadaTo.getClasse().getTurma());
 				classe.setDescricaoSala(chamadaTo.getClasse().getDescricaoSala());
+				chamadaForm.setId(chamadaTo.getId());
 				chamadaForm.setClasse(classe);
 				chamadaForm.setDisciplina(disciplina);
 				listaChamadasForm.add(chamadaForm);
 			}
 			
 			request.setAttribute("listaChamadas", listaChamadasForm);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/principal.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
 			dispatcher.forward(request, response);
 			
 		}catch(Exception e){

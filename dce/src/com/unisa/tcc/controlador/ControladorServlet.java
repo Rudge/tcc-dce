@@ -21,11 +21,20 @@ public class ControladorServlet extends HttpServlet {
 	public void service(HttpServletRequest request, HttpServletResponse response) 
 	throws ServletException, IOException {
 		
-		String acaoNomeClasse = Constantes.URL_ACTION + request.getParameter("acao");
 		Class<?> acaoClasse = null;
-		InterfaceActionNegocio actionNegocioObjeto = null;
-
+		
 		try {
+			String acao = request.getParameter("acao");
+			
+			String acaoNomeClasse = Constantes.URL_ACTION + acao;
+			
+			if((acao == null || !acao.equals("")  || 
+			   (request.getSession().getAttribute("usuario") == null && !"AutenticacaoAction".equals(acao)))){
+				throw new DceException("Usuário não autenticado!");
+			} 
+			
+			InterfaceActionNegocio actionNegocioObjeto = null;
+		
 			acaoClasse = Class.forName(acaoNomeClasse);
 			
 			if (!InterfaceActionNegocio.class.isAssignableFrom(acaoClasse)) {
@@ -36,14 +45,19 @@ public class ControladorServlet extends HttpServlet {
 			actionNegocioObjeto.executar(request, response);
 			
 		} catch (ClassNotFoundException e) {
-			request.setAttribute("mensagemErro", "Não encontro a classe " + acaoClasse);
+			request.setAttribute("msgErro", "Não encontro a classe " + acaoClasse);
 			throw new ServletException("Não encontro a classe " + acaoClasse);
 		}catch (DceException e){
-			request.setAttribute("mensagemErro", e.getMessage());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/erro.jsp");
-			dispatcher.forward(request, response);
+			request.setAttribute("msgErro", e.getMessage());
+			if(request.getSession().getAttribute("usuario") != null){
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/erro.jsp");
+				dispatcher.forward(request, response);
+			}else{
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+				dispatcher.forward(request, response);
+			}
 		}catch (Exception e) {
-			request.setAttribute("mensagemErro", "A lógica de negócios causou uma exceção");
+			request.setAttribute("msgErro", "A lógica de negócios causou uma exceção");
 			throw new ServletException("A lógica de negócios causou uma exceção");
 		}
 	}

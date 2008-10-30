@@ -29,10 +29,10 @@ import com.unisa.tcc.propriedades.DceException;
 				}
 				if(autenticado){
 					request.getSession().setAttribute("usuario", professorForm);
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/principal.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
 					dispatcher.forward(request, response);
 				}else{
-					request.setAttribute("erro", "Usuário ou senha inválidos!");
+					request.setAttribute("msgErro", "Usuário ou senha inválidos!");
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 					dispatcher.forward(request, response);
 				}

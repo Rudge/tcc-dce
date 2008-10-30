@@ -4,11 +4,19 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ChamadaForm {
+	
+	private int id;
 	private List<AlunoForm> listaAlunos;
 	private GregorianCalendar data;
 	private DisciplinaForm disciplina;
 	private ClasseForm classe;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public ClasseForm getClasse() {
 		return classe;
 	}
