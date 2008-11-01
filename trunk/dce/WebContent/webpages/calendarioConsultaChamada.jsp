@@ -29,7 +29,7 @@
         <div id="principal">
 			<form id="formCalendar" name="formCalendar" method="post" action="dce.do">
             	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
-				<input type="hidden" name="acao" value=""/>
+				<input type="hidden" name="acao" value="ConsultaChamadaAction"/>
 				Olá, Professor <%=professor.getNome()%>.
 				<div id="calendario">
 				</div>
