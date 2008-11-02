@@ -29,7 +29,8 @@
         <div id="principal">
 			<form id="formCalendar" name="formCalendar" method="post" action="dce.do">
             	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
-				<input type="hidden" name="acao" value="ConsultaChamadaAction"/>
+				<input type="hidden" name="acao" value="ConsultaCalendarioChamadasAction"/>
+				<input type="hidden" id="idChamada" name="idChamada" value="" />
 				Olá, Professor <%=professor.getNome()%>.
 				<div id="calendario">
 				</div>
@@ -67,7 +68,7 @@
 		{
 			var referencia = calendarioObj.getHtmlElementReferences();
 			referencia.dataEscolhida.value = inputArray.day + '/' + inputArray.month + '/' + inputArray.year;
-			document.getElementById("formCalendar").acao.value = "ConsultaChamadaAction";
+			document.getElementById("formCalendar").acao.value = "ConsultaCalendarioChamadasAction";
 			document.formCalendar.submit();
 		}	
 		window.onload = carregarCalendario;
