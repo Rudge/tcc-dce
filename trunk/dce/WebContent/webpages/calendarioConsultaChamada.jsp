@@ -17,6 +17,7 @@
 		listaChamadas = (List<ChamadaForm>)request.getAttribute("listaChamadas");
 	}
 %>
+<script type="text/javascript" src="js/consultaChamada.js"></script>
 <script type="text/javascript" src="js/dhtmlSuite-common.js"></script>
 <script type="text/javascript">
 	DHTMLSuite.include("calendar");
@@ -38,7 +39,7 @@
 					if(listaChamadas != null && !listaChamadas.isEmpty()){
 						out.println("<BR>Aulas: <BR>");
 						for (ChamadaForm chamada : listaChamadas) {
-							out.println("<a href=\"\" onclick=\"escolherChamada(" + chamada.getId() + ") >" + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
+							out.println("<a onclick=\"escolherChamada("+ chamada.getId() + ")\" href=\"#\" >" + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
 										"º" + chamada.getClasse().getTurma() + " - " + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>"); 
 						}
 					}
