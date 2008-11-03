@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.unisa.tcc.bean.AlunoBean;
 import com.unisa.tcc.bean.ChamadaBean;
 import com.unisa.tcc.bean.ClasseBean;
 import com.unisa.tcc.bean.DisciplinaBean;
@@ -45,13 +46,37 @@ public class ControladorChamadasDAO extends TransactionManager{
 				chamadaBean.setDisciplina(disciplina);
 				listaChamadas.add(chamadaBean);
 			}
-		}catch (SQLException e) {
-			throw new DceException("Erro na consulta das chamadas por data!");
 		}finally{
 			rs.close();
 			stmt.close();
 			conn.close();
 		}
 		return listaChamadas;
+	}
+	
+	public List<AlunoBean> consultarAlunosChamada(int idChamada) throws SQLException, DceException {
+		List<AlunoBean> listaAlunosBean = new ArrayList<AlunoBean>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		StringBuffer query = new StringBuffer();
+		try{
+			conn = getConn();
+			query.append("");
+			stmt = conn.prepareStatement(query.toString());
+			stmt.setInt(1, idChamada);
+			rs = stmt.executeQuery();
+			while(rs.next()){
+				AlunoBean aluno = new AlunoBean();
+				aluno.setMatricula(rs.getInt("MATRICULA"));
+				aluno.setNome(rs.getString("NOME"));
+				aluno.setPresenca(rs.getBoolean("PRESENCA"));
+				listaAlunosBean.add(aluno);
+			}
+		}finally{
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
+		return listaAlunosBean;
 	}
 }

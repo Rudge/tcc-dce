@@ -20,7 +20,7 @@
 			<div id="frmLogin">
 				<label class="labelErro"><%=erro%></label>
 				<br>
-        		<a href="javascript:history.go(-1)">Voltar</a>
+				<input class="botao" id="voltar" type="submit" onclick="javascript:history.go(-1)" name="voltar" value="Voltar"/>
 			</div>
         </div>
         <div id="rodape"/>	

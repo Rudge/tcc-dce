@@ -14,7 +14,7 @@
 			ERRO 404 - Página não encontrada.
 			<br/>
 			<br/>
-			 <a href="/dce">Ir para a Página Inicial.</a>
+			<a href="/dce">Ir para a Página Inicial</a>
         </div>
         <div id="rodape"/>	
     </div>
