@@ -10,6 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>DCE</title>
+<script type="text/javascript" src="js/realizarChamada.js"></script>
 <link href="estilos/estilo.css" rel="stylesheet" type="text/css" />
 <% 
 	List<AlunoForm> listaAlunos= null;
@@ -24,20 +25,40 @@
         <div id="topo">				
         </div>
         <div id="principal">
-			<form id="formCalendar" name="formCalendar" method="post" action="dce.do">
+			<form id="formChamada" name="formChamada" method="post" action="dce.do">
             	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
-				<input type="hidden" name="acao" value="ConsultaCalendarioChamadasAction"/>
+				<input type="hidden" name="acao" value=""/>
 				<input type="hidden" id="idChamada" name="idChamada" value="" />
 				Olá, Professor <%=professor.getNome()%>.
-				<div id="calendario">
-				</div>
+				<table>
 				<%
-					if(listaAlunos != null && !listaAlunos.isEmpty()){
-						for (AlunoForm aluno : listaAlunos) {
-							
-						}
+					if(listaAlunos != null && !listaAlunos.isEmpty()){%>
+					   <tr>
+							<th>Presença</th>
+							<th>Matricula</th>
+							<th>Nome</th>
+					   </tr>
+					   <% for (AlunoForm aluno : listaAlunos) {%>
+						<tr>
+							<td>SIM<input type="radio" id="<%=aluno.getMatricula()%>presenca" name="chamada<%=aluno.getMatricula()%>" value="true"/>
+							NÃO<input type="radio" id="<%=aluno.getMatricula()%>falta" name="chamada<%=aluno.getMatricula()%>" value="false"/></td>
+						<%
+							if(aluno.isPresenca()){ %>
+							<script>
+								marcarOpcaoRadio(<%=aluno.getMatricula()%> + "presenca");
+							</script>	
+						<%	}else{  %>
+							<script>
+								marcarOpcaoRadio(<%=aluno.getMatricula()%> + "falta");
+							</script>
+						<%	} %>
+							<td><%=aluno.getMatricula()%></td>
+							<td><%=aluno.getNome()%></td>
+						</tr>
+					  <%}
 					}
 				%>
+				</table>
 			</form>
         </div>
     	<div id="rodape">
