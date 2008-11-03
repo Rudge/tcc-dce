@@ -45,7 +45,7 @@ public class ControladorServlet extends HttpServlet {
 			actionNegocioObjeto.executar(request, response);
 			
 		} catch (ClassNotFoundException e) {
-			request.setAttribute("msgErro", "Não encontro a classe " + acaoClasse);
+			request.setAttribute("msgErro", "A implementação causou uma exceção");
 			throw new ServletException("Não encontro a classe " + acaoClasse);
 		}catch (DceException e){
 			request.setAttribute("msgErro", e.getMessage());
