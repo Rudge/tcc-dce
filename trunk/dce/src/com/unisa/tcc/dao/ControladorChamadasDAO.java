@@ -22,7 +22,7 @@ public class ControladorChamadasDAO extends TransactionManager{
 		StringBuffer query = new StringBuffer();
 		try{
 			conn = getConn();
-			query.append("SELECT CH.IDCHAMADA, DIS.NOME AS DISCIPLINA, CL.SERIE_SERIE, CL.SERIE_TURMA, CL.DESCRICAO_SALA ");
+			query.append("SELECT DISTINCT CH.IDCHAMADA, DIS.NOME AS DISCIPLINA, CL.SERIE_SERIE, CL.SERIE_TURMA, CL.DESCRICAO_SALA ");
 			query.append("FROM CHAMADA CH, CLASSE_CHAMADA CLCH, CLASSE CL, DISCIPLINAS DIS ");
 			query.append("WHERE CLCH.CHAMADA_IDCHAMADA = CH.IDCHAMADA ");
 			query.append("AND CL.IDCLASSE = CLCH.CLASSE_IDCLASSE ");
@@ -58,10 +58,13 @@ public class ControladorChamadasDAO extends TransactionManager{
 		List<AlunoBean> listaAlunosBean = new ArrayList<AlunoBean>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		StringBuffer query = new StringBuffer();
 		try{
+			StringBuffer query = new StringBuffer();
 			conn = getConn();
-			query.append("");
+			query.append("SELECT AL.NOME, AL.MATRICULA, CLCH.PRESENCA " +
+						 "FROM CLASSE_CHAMADA CLCH, ALUNO AL " +
+						 "WHERE CLCH.CHAMADA_IDCHAMADA = ? " +
+						 "AND AL.MATRICULA = CLCH.ALUNO_MATRICULA;");
 			stmt = conn.prepareStatement(query.toString());
 			stmt.setInt(1, idChamada);
 			rs = stmt.executeQuery();
