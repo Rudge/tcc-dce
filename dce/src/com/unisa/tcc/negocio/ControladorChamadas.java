@@ -4,9 +4,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.unisa.tcc.bean.AlunoBean;
 import com.unisa.tcc.bean.ChamadaBean;
 import com.unisa.tcc.dao.ControladorChamadasDAO;
+import com.unisa.tcc.form.AlunoForm;
 import com.unisa.tcc.propriedades.DceException;
+import com.unisa.tcc.to.AlunoTo;
 import com.unisa.tcc.to.ChamadaTo;
 import com.unisa.tcc.to.ClasseTo;
 import com.unisa.tcc.to.DisciplinaTo;
@@ -42,5 +45,26 @@ public class ControladorChamadas {
 		}
 		return listaChamadasTo;
 	}
-
+	
+	public List<AlunoTo> consultarAlunosChamada(String idChamada) throws DceException{
+		
+		List<AlunoTo> listaAlunosTo = new ArrayList<AlunoTo>();
+		try{
+			ControladorChamadasDAO controladorDao = new ControladorChamadasDAO();
+			List<AlunoBean> listaAlunosBean = controladorDao.consultarAlunosChamada(new Integer(idChamada));
+			
+			for (AlunoBean alunoBean : listaAlunosBean) {
+				AlunoTo alunoTo = new AlunoTo();
+				alunoTo.setMatricula(alunoBean.getMatricula());
+				alunoTo.setNome(alunoBean.getNome());
+				alunoTo.setPresenca(alunoBean.isPresenca());
+				listaAlunosTo.add(alunoTo);
+			}
+			
+		}catch (SQLException e) {
+			throw new DceException("Erro na consulta de Alunos por chamada!");
+		}	
+		
+		return listaAlunosTo;
+	}
 }
