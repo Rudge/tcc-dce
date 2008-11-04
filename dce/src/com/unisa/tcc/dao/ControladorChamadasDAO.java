@@ -30,7 +30,11 @@ public class ControladorChamadasDAO extends TransactionManager{
 			query.append("AND CH.DATA_CHAMADA = ? ");
 			query.append("AND DIS.PROFESSOR_IDPROFESSOR = ? ");
 			stmt = conn.prepareStatement(query.toString());
-			stmt.setDate(1, new Date( new java.util.GregorianCalendar(ano, mes, dia).getTimeInMillis()));
+			if(ano != 0 && mes != 0 && dia != 0){
+				stmt.setDate(1, new Date( new java.util.GregorianCalendar(ano, mes, dia).getTimeInMillis()));
+			}else{
+				stmt.setDate(1, new Date( new java.util.GregorianCalendar().getTimeInMillis()));
+			}
 			stmt.setInt(2, idProfessor);
 			rs = stmt.executeQuery();
 			while(rs.next()){
