@@ -7,7 +7,9 @@ import java.util.List;
 import com.unisa.tcc.bean.AlunoBean;
 import com.unisa.tcc.bean.ChamadaBean;
 import com.unisa.tcc.dao.ControladorChamadasDAO;
-import com.unisa.tcc.form.AlunoForm;
+import com.unisa.tcc.form.ChamadaForm;
+import com.unisa.tcc.form.ClasseForm;
+import com.unisa.tcc.form.DisciplinaForm;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.AlunoTo;
 import com.unisa.tcc.to.ChamadaTo;
@@ -21,10 +23,15 @@ public class ControladorChamadas {
 		List<ChamadaTo> listaChamadasTo = new ArrayList<ChamadaTo>();
 		try{
 			ControladorChamadasDAO controladorDAO = new ControladorChamadasDAO();	 
-			String[] arrData = data.split("/");
-			int ano = Integer.parseInt(arrData[2]);
-			int mes = Integer.parseInt(arrData[1]) - 1;
-			int dia = Integer.parseInt(arrData[0]);
+			int ano = 0;
+			int mes = 0;
+			int dia = 0;
+			if(data != null && !"".equals(data)){
+				String[] arrData = data.split("/");
+				ano = Integer.parseInt(arrData[2]);
+				mes = Integer.parseInt(arrData[1]) - 1;
+				dia = Integer.parseInt(arrData[0]);
+			}
 			List<ChamadaBean> listaChamadasBean = controladorDAO.consultarChamadasPorData(idProfessor, ano, mes, dia);
 			
 			for (ChamadaBean chamadaBean : listaChamadasBean) {
@@ -66,5 +73,25 @@ public class ControladorChamadas {
 		}	
 		
 		return listaAlunosTo;
+	}
+	
+	public List<ChamadaForm> tranfListaChamadaTo(List<ChamadaTo> listaChamadasTo){
+		List<ChamadaForm> listaChamadasForm = new ArrayList<ChamadaForm>();
+		
+		for (ChamadaTo chamadaTo : listaChamadasTo) {
+			ChamadaForm chamadaForm = new ChamadaForm(); 
+			ClasseForm classe = new ClasseForm();
+			DisciplinaForm disciplina = new DisciplinaForm();
+			disciplina.setNome(chamadaTo.getDisciplina().getNome());
+			classe.setSerie(chamadaTo.getClasse().getSerie());
+			classe.setTurma(chamadaTo.getClasse().getTurma());
+			classe.setDescricaoSala(chamadaTo.getClasse().getDescricaoSala());
+			chamadaForm.setId(chamadaTo.getId());
+			chamadaForm.setClasse(classe);
+			chamadaForm.setDisciplina(disciplina);
+			listaChamadasForm.add(chamadaForm);
+		}
+		
+		return listaChamadasForm;
 	}
 }

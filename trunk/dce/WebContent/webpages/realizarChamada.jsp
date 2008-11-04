@@ -30,6 +30,7 @@
 				<input type="hidden" name="acao" value=""/>
 				<input type="hidden" id="idChamada" name="idChamada" value="" />
 				Olá, Professor <%=professor.getNome()%>.
+				<BR>
 				<table>
 				<%
 					if(listaAlunos != null && !listaAlunos.isEmpty()){%>
@@ -59,6 +60,8 @@
 					}
 				%>
 				</table>
+				<input OnClick="salvar()" class="botao" type="button" value="Salvar"/>
+                <input OnClick="voltar()" class="botao" type="button" value="Voltar"/>
 			</form>
         </div>
     	<div id="rodape">
