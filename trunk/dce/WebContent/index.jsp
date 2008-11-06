@@ -18,19 +18,19 @@
         </div>
         <div id="principal">
         	<div id="frmLogin">
-            	<form id="formLogin" name="formLogin" method="post" action="dce.do" onSubmit="return validarCampos()">
+            	<form id="formLogin" name="formLogin" method="post" action="dce.do">
 					<label class="labelErro"><%=msgErro%></label>
                   	<label>Usuário:</label>
-					<input type="text" id="usuario" name="usuario" />
-                  	<label>Senha:</label><input id="senha" type="password" name="senha"/>
+					<input type="text" id="usuario" name="usuario" maxlength="20"/>
+                  	<label>Senha:</label><input id="senha" type="password" name="senha" maxlength="20"/>
                   	<label>Tipo:</label>
 					<select name="tipoUsuario">
                     	<option value="professor">Professor</option>
                     	<option value="administrador">Administrador</option>
                   	</select>
-                  	<input class="botao" id="ok" type="submit" name="ok" value="OK"/>
-                  	<input class="botao" id="lembrarSenha" type="submit" name="lembrarSenha" value="Lembrar Senha?"/>
-					<input type="hidden" name="acao" value="AutenticacaoAction"/>
+                  	<input OnClick="ok()" class="botao" type="button" name="ok" value="OK"/>
+                  	<input OnClick="lembrarSenha()" class="botao" type="button" name="lembrarSenha" value="Lembrar Senha?"/>
+					<input type="hidden" name="acao" value=""/>
         	</div>
         </div>
         <div id="rodape"/>
