@@ -18,11 +18,17 @@ public class ConsultaCalendarioChamadasAction implements InterfaceActionNegocio{
 	public void executar(HttpServletRequest request, HttpServletResponse response) throws DceException {
 		try{
 			ProfessorForm professor = (ProfessorForm) request.getSession().getAttribute("usuario");
-			String data = (String) request.getParameter("dataEscolhida");
+			String data = null;
+			if(request.getParameter("dataEscolhida") != null){
+				data = (String) request.getParameter("dataEscolhida");
+			}else{
+				data = (String) request.getSession().getAttribute("dataEscolhida");
+			}
 			ControladorChamadas controladorChamadas = new ControladorChamadas();
 			List<ChamadaTo> listaChamadasTo = controladorChamadas.consultarChamadasPorData(professor.getId(), data);
 			List<ChamadaForm> listaChamadasForm = controladorChamadas.tranfListaChamadaTo(listaChamadasTo);
 			request.setAttribute("listaChamadas", listaChamadasForm);
+			request.getSession().setAttribute("dataEscolhida", data);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
 			dispatcher.forward(request, response);
 			

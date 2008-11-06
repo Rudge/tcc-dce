@@ -6,7 +6,9 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.unisa.tcc.form.AlunoForm"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.GregorianCalendar"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>DCE</title>
@@ -18,6 +20,20 @@
 	if(request.getAttribute("listaAlunos") != null){
 		listaAlunos = (List<AlunoForm>)request.getAttribute("listaAlunos");
 	}
+	String data = "";
+	if(session.getAttribute("dataEscolhida") != null){
+		data = (String) session.getAttribute("dataEscolhida");
+	}
+	int ano = 0, mes = 0, dia = 0;
+	
+	if(data != null && !"".equals(data)){
+		String[] arrData = data.split("-");
+		ano = Integer.parseInt(arrData[0]);
+		mes = Integer.parseInt(arrData[1]) - 1;
+		dia = Integer.parseInt(arrData[2]);
+	}
+	GregorianCalendar calendario = new GregorianCalendar();
+	GregorianCalendar calendarioDataEscolhida = new GregorianCalendar(ano, mes, dia);
 %>
 </head>
 <body>
@@ -26,11 +42,7 @@
         </div>
         <div id="principal">
 			<form id="formChamada" name="formChamada" method="post" action="dce.do">
-            	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
 				<input type="hidden" name="acao" value=""/>
-				<input type="hidden" id="idChamada" name="idChamada" value="" />
-				Olá, Professor <%=professor.getNome()%>.
-				<BR>
 				<table>
 				<%
 					if(listaAlunos != null && !listaAlunos.isEmpty()){%>
@@ -45,13 +57,18 @@
 							NÃO<input type="radio" id="<%=aluno.getMatricula()%>falta" name="chamada<%=aluno.getMatricula()%>" value="false"/></td>
 						<%
 							if(aluno.isPresenca()){ %>
-							<script>
-								marcarOpcaoRadio(<%=aluno.getMatricula()%> + "presenca");
-							</script>	
+								<script>
+									marcarOpcaoRadio(<%=aluno.getMatricula()%> + "presenca");
+								</script>	
 						<%	}else{  %>
-							<script>
-								marcarOpcaoRadio(<%=aluno.getMatricula()%> + "falta");
-							</script>
+								<script>
+									marcarOpcaoRadio(<%=aluno.getMatricula()%> + "falta");
+								</script>
+						<%	} 
+							if(!calendario.getTime().equals(calendarioDataEscolhida.getTime())){%>
+								<script>
+									desabilitarOpcaoRadio(<%=aluno.getMatricula()%>);
+								</script>
 						<%	} %>
 							<td><%=aluno.getMatricula()%></td>
 							<td><%=aluno.getNome()%></td>

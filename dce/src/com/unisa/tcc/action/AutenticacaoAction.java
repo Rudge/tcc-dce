@@ -10,7 +10,6 @@ import com.unisa.tcc.form.ChamadaForm;
 import com.unisa.tcc.form.ProfessorForm;
 import com.unisa.tcc.negocio.ControladorChamadas;
 import com.unisa.tcc.negocio.Login;
-import com.unisa.tcc.propriedades.Constantes;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.ChamadaTo;
 
@@ -22,40 +21,32 @@ import com.unisa.tcc.to.ChamadaTo;
 		// TODO Auto-generated method stub
 		try{
 			Login login = new Login();
-			if(request.getParameter("ok") != null && request.getParameter("ok").equals(Constantes.OK)){
-				boolean autenticado = false;
-				ProfessorForm professorForm = new ProfessorForm();
-				if(request.getParameter("tipoUsuario").equals("professor")){
-					professorForm.setUsuario(request.getParameter("usuario"));
-					professorForm.setSenha(request.getParameter("senha"));
-					autenticado = login.autenticarProfessor(professorForm);
-					if(autenticado){
-						ControladorChamadas controlador = new ControladorChamadas();
-						List<ChamadaTo> listaChamadasTo = controlador.consultarChamadasPorData(professorForm.getId(), null);
-						List<ChamadaForm>listaChamadasForm = controlador.tranfListaChamadaTo(listaChamadasTo);
-						request.setAttribute("listaChamadas", listaChamadasForm);
-						request.getSession().setAttribute("usuario", professorForm);
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
-						dispatcher.forward(request, response);
-					}else{
-						request.setAttribute("msgErro", "Usuário ou senha inválidos!");
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
-						dispatcher.forward(request, response);
-					}
+			boolean autenticado = false;
+			ProfessorForm professorForm = new ProfessorForm();
+			if(request.getParameter("tipoUsuario").equals("professor")){
+				professorForm.setUsuario(request.getParameter("usuario"));
+				professorForm.setSenha(request.getParameter("senha"));
+				autenticado = login.autenticarProfessor(professorForm);
+				if(autenticado){
+					ControladorChamadas controlador = new ControladorChamadas();
+					List<ChamadaTo> listaChamadasTo = controlador.consultarChamadasPorData(professorForm.getId(), null);
+					List<ChamadaForm>listaChamadasForm = controlador.tranfListaChamadaTo(listaChamadasTo);
+					request.setAttribute("listaChamadas", listaChamadasForm);
+					request.getSession().setAttribute("usuario", professorForm);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
+					dispatcher.forward(request, response);
 				}else{
-					if(autenticado){
-						request.getSession().setAttribute("usuario", professorForm);
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
-						dispatcher.forward(request, response);
-					}else{
-						request.setAttribute("msgErro", "Usuário ou senha inválidos!");
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
-						dispatcher.forward(request, response);
-					}
+					request.setAttribute("msgErro", "Usuário ou senha inválidos!");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+					dispatcher.forward(request, response);
 				}
 			}else{
-				if(login.lembrarSenha()){
-					request.setAttribute("msgErro", "Funcionalidade não disponível!");
+				if(autenticado){
+					request.getSession().setAttribute("usuario", professorForm);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
+					dispatcher.forward(request, response);
+				}else{
+					request.setAttribute("msgErro", "Usuário ou senha inválidos!");
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 					dispatcher.forward(request, response);
 				}

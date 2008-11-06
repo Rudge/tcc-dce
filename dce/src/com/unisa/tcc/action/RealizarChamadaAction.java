@@ -12,7 +12,7 @@ import com.unisa.tcc.negocio.ControladorChamadas;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.AlunoTo;
 
-public class ConsultaChamadaAction implements InterfaceActionNegocio{
+public class RealizarChamadaAction implements InterfaceActionNegocio{
 	
 	@Override
 	public void executar(HttpServletRequest request, HttpServletResponse response) throws DceException {

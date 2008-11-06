@@ -28,10 +28,10 @@ public class ControladorChamadas {
 			int mes = 0;
 			int dia = 0;
 			if(data != null && !"".equals(data)){
-				String[] arrData = data.split("/");
-				ano = Integer.parseInt(arrData[2]);
+				String[] arrData = data.split("-");
+				ano = Integer.parseInt(arrData[0]);
 				mes = Integer.parseInt(arrData[1]) - 1;
-				dia = Integer.parseInt(arrData[0]);
+				dia = Integer.parseInt(arrData[2]);
 			}
 			List<ChamadaBean> listaChamadasBean = controladorChamadasDAO.consultarChamadasPorData(idProfessor, ano, mes, dia);
 			
