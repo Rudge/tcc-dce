@@ -8,10 +8,11 @@ import com.unisa.tcc.to.ProfessorTo;
 
 public class Login{
 	
+	private LoginDAO loginDao = new LoginDAO();
+	
 	public boolean autenticarProfessor(ProfessorForm professorForm) throws DceException{
 		ProfessorTo professorTo = new ProfessorTo();
 		ProfessorBean professorBean = new ProfessorBean();
-		LoginDAO loginDao = new LoginDAO();
 		try{
 			professorBean.setUsuario(professorForm.getUsuario());
 			professorBean.setSenha(professorForm.getSenha());
@@ -30,6 +31,6 @@ public class Login{
 	}
 	
 	public boolean lembrarSenha() throws DceException {
-		return false;
+		return true;
 	}
 }

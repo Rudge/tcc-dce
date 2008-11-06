@@ -18,11 +18,12 @@ import com.unisa.tcc.to.DisciplinaTo;
 
 public class ControladorChamadas {
 	
+	private ControladorChamadasDAO controladorChamadasDAO = new ControladorChamadasDAO();	
+	
 	public List<ChamadaTo> consultarChamadasPorData(int idProfessor, String data) throws DceException{
 		
 		List<ChamadaTo> listaChamadasTo = new ArrayList<ChamadaTo>();
-		try{
-			ControladorChamadasDAO controladorDAO = new ControladorChamadasDAO();	 
+		try{ 
 			int ano = 0;
 			int mes = 0;
 			int dia = 0;
@@ -32,7 +33,7 @@ public class ControladorChamadas {
 				mes = Integer.parseInt(arrData[1]) - 1;
 				dia = Integer.parseInt(arrData[0]);
 			}
-			List<ChamadaBean> listaChamadasBean = controladorDAO.consultarChamadasPorData(idProfessor, ano, mes, dia);
+			List<ChamadaBean> listaChamadasBean = controladorChamadasDAO.consultarChamadasPorData(idProfessor, ano, mes, dia);
 			
 			for (ChamadaBean chamadaBean : listaChamadasBean) {
 				ChamadaTo chamadaTo = new ChamadaTo(); 
@@ -57,8 +58,7 @@ public class ControladorChamadas {
 		
 		List<AlunoTo> listaAlunosTo = new ArrayList<AlunoTo>();
 		try{
-			ControladorChamadasDAO controladorDao = new ControladorChamadasDAO();
-			List<AlunoBean> listaAlunosBean = controladorDao.consultarAlunosChamada(new Integer(idChamada));
+			List<AlunoBean> listaAlunosBean = controladorChamadasDAO.consultarAlunosChamada(new Integer(idChamada));
 			
 			for (AlunoBean alunoBean : listaAlunosBean) {
 				AlunoTo alunoTo = new AlunoTo();
