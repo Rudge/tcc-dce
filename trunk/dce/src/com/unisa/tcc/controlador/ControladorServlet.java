@@ -29,7 +29,7 @@ public class ControladorServlet extends HttpServlet {
 			String acaoNomeClasse = Constantes.URL_ACTION + acao;
 			
 			if((acao == null || acao.equals(""))  || 
-			   (request.getSession().getAttribute("usuario") == null && !"AutenticacaoAction".equals(acao))){
+			   (request.getSession().getAttribute("usuario") == null && !"AutenticacaoAction".equals(acao) && !"LembraSenhaAction".equals(acao))){
 				throw new DceException("Usuário não autenticado!");
 			} 
 			

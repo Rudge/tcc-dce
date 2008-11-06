@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.unisa.tcc.bean.AlunoBean;
@@ -31,9 +32,9 @@ public class ControladorChamadasDAO extends TransactionManager{
 			query.append("AND DIS.PROFESSOR_IDPROFESSOR = ? ");
 			stmt = conn.prepareStatement(query.toString());
 			if(ano != 0 && mes != 0 && dia != 0){
-				stmt.setDate(1, new Date( new java.util.GregorianCalendar(ano, mes, dia).getTimeInMillis()));
+				stmt.setDate(1, new Date( new GregorianCalendar(ano, mes, dia).getTimeInMillis()));
 			}else{
-				stmt.setDate(1, new Date( new java.util.GregorianCalendar().getTimeInMillis()));
+				stmt.setDate(1, new Date( new GregorianCalendar().getTimeInMillis()));
 			}
 			stmt.setInt(2, idProfessor);
 			rs = stmt.executeQuery();
@@ -68,7 +69,8 @@ public class ControladorChamadasDAO extends TransactionManager{
 			query.append("SELECT AL.NOME, AL.MATRICULA, CLCH.PRESENCA " +
 						 "FROM CLASSE_CHAMADA CLCH, ALUNO AL " +
 						 "WHERE CLCH.CHAMADA_IDCHAMADA = ? " +
-						 "AND AL.MATRICULA = CLCH.ALUNO_MATRICULA;");
+						 "AND AL.MATRICULA = CLCH.ALUNO_MATRICULA " +
+						 "ORDER BY NOME ASC ");
 			stmt = conn.prepareStatement(query.toString());
 			stmt.setInt(1, idChamada);
 			rs = stmt.executeQuery();

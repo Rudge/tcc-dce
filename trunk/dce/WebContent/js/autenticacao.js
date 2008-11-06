@@ -2,9 +2,10 @@ function lembrarSenha(){
 	if(document.getElementById("usuario").value == ""){
 		alert("Por favor, preencha o campo do usuário!!");
 		document.getElementById("usuario").focus();
+	}else{
+		document.getElementById("formLogin").acao.value = "LembraSenhaAction";
+		document.formLogin.submit();
 	}
-	document.getElementById("formLogin").acao.value = "AutenticacaoAction";
-	document.formLogin.submit();
 }
 function ok(){
 	if(document.getElementById("usuario").value == ""){
@@ -15,7 +16,8 @@ function ok(){
 		alert("Por favor, preencha o campo de senha!!");
 		document.getElementById("senha").focus();
 		
+	}else{
+		document.getElementById("formLogin").acao.value = "AutenticacaoAction";
+		document.formLogin.submit();
 	}
-	document.getElementById("formLogin").acao.value = "AutenticacaoAction";
-	document.formLogin.submit();
 }

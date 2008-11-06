@@ -16,6 +16,10 @@
 	if(request.getAttribute("listaChamadas") != null){
 		listaChamadas = (List<ChamadaForm>)request.getAttribute("listaChamadas");
 	}
+	String data = "";
+	if(session.getAttribute("dataEscolhida") != null){
+		data = (String) session.getAttribute("dataEscolhida");
+	}
 %>
 <script type="text/javascript" src="js/consultaChamada.js"></script>
 <script type="text/javascript" src="js/dhtmlSuite-common.js"></script>
@@ -29,7 +33,7 @@
         </div>
         <div id="principal">
 			<form id="formCalendar" name="formCalendar" method="post" action="dce.do">
-            	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value=""/>
+            	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value="<%=data%>"/>
 				<input type="hidden" name="acao" value="ConsultaCalendarioChamadasAction"/>
 				<input type="hidden" id="idChamada" name="idChamada" value="" />
 				Olá, Professor <%=professor.getNome()%>.
@@ -39,7 +43,7 @@
 					if(listaChamadas != null && !listaChamadas.isEmpty()){
 						out.println("<BR>Aulas: <BR>");
 						for (ChamadaForm chamada : listaChamadas) {
-							out.println("<a onclick=\"escolherChamada("+ chamada.getId() + ")\" href=\"#\" >" + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
+							out.println("<a onclick=\"escolherChamada("+ chamada.getId() + ")\" href=\"#\" >" + chamada.getHoraAula() + " - " + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
 										"º" + chamada.getClasse().getTurma() + " - " + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>"); 
 						}
 					}
@@ -50,14 +54,18 @@
 		</div>	
 	<script type="text/javascript">	
 		var moldeCalendar = new DHTMLSuite.calendarModel();
-		moldeCalendar.setLanguageCode('pt-br')
+		moldeCalendar.setLanguageCode('pt-br');
+		moldeCalendar.setInitialDateFromInput(document.getElementById("dataEscolhida"),'yyyy-mm-dd');
 		var calendarioObj = new DHTMLSuite.calendar({minuteDropDownInterval:10,numberOfRowsInHourDropDown:5,callbackFunctionOnDayClick:'getDataCalendario',isDragable:false,displayTimeBar:false});
 		calendarioObj.setCalendarModelReference(moldeCalendar);
 		function carregarCalendario()
 		{
-			var date = new Date();
-			var dataAtual = date.getDate()  + '/' + (date.getMonth()+1) + '/' + date.getFullYear();
-			document.getElementById("dataEscolhida").value = dataAtual;
+			if(document.getElementById("dataEscolhida").value == ""){
+				var date = new Date();
+				var dataAtual = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+				document.getElementById("dataEscolhida").value = dataAtual;
+			}
+			moldeCalendar.setInitialDateFromInput(document.getElementById("dataEscolhida"),'yyyy-mm-dd');
 			calendarioObj.addHtmlElementReference('dataEscolhida',document.formCalendar.dataEscolhida);
 			calendarioObj.setDisplayCloseButton(false);
 			if(!calendarioObj.isVisible()){
@@ -68,7 +76,7 @@
 		function getDataCalendario(inputArray)
 		{
 			var referencia = calendarioObj.getHtmlElementReferences();
-			referencia.dataEscolhida.value = inputArray.day + '/' + inputArray.month + '/' + inputArray.year;
+			referencia.dataEscolhida.value = inputArray.year + '-' + inputArray.month + '-' + inputArray.day;
 			document.getElementById("formCalendar").acao.value = "ConsultaCalendarioChamadasAction";
 			document.formCalendar.submit();
 		}	

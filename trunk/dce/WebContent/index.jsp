@@ -28,8 +28,8 @@
                     	<option value="professor">Professor</option>
                     	<option value="administrador">Administrador</option>
                   	</select>
-                  	<input OnClick="ok()" class="botao" type="button" name="ok" value="OK"/>
-                  	<input OnClick="lembrarSenha()" class="botao" type="button" name="lembrarSenha" value="Lembrar Senha?"/>
+                  	<input OnClick="ok()" class="botao" type="button" value="OK"/>
+                  	<input OnClick="lembrarSenha()" class="botao" type="button" value="Lembrar Senha?"/>
 					<input type="hidden" name="acao" value=""/>
         	</div>
         </div>

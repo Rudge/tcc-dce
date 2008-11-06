@@ -22,7 +22,7 @@ public abstract class Usuario {
 		return usuario;
 	}
 	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+		this.usuario = usuario.toUpperCase().trim();
 	}
 	public String getSenha() {
 		return senha;

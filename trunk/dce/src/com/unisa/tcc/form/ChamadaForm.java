@@ -10,7 +10,14 @@ public class ChamadaForm {
 	private GregorianCalendar data;
 	private DisciplinaForm disciplina;
 	private ClasseForm classe;
+	private String horaAula;
 	
+	public String getHoraAula() {
+		return horaAula;
+	}
+	public void setHoraAula(String horaAula) {
+		this.horaAula = horaAula;
+	}
 	public int getId() {
 		return id;
 	}
