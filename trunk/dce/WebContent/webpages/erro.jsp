@@ -6,6 +6,10 @@
 	if (erro == null || erro.equals("")) {
     	erro = "Erro ao realizar operação. Por favor contacte o suporte.";
     }
+	String acao = "AutenticacaoAction";
+	if(request.getParameter("acao") != null){
+		acao = request.getParameter("acao");
+	}
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -18,9 +22,12 @@
         </div>
         <div id="principal">
 			<div id="frmLogin">
-				<label class="labelErro"><%=erro%></label>
-				<br>
-				<input class="botao" id="voltar" type="submit" onclick="javascript:history.go(-1)" name="voltar" value="Voltar"/>
+				<form>
+					<input type="hidden" id="acao" name="acao" value="<%=acao%>"/>
+					<label class="labelErro"><%=erro%></label>
+					<br>
+					<input class="botao" id="voltar" type="submit" name="voltar" value="Voltar"/>
+				</form>
 			</div>
         </div>
         <div id="rodape"/>	

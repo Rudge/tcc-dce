@@ -22,9 +22,9 @@ public class ControladorServlet extends HttpServlet {
 	throws ServletException, IOException {
 		
 		Class<?> acaoClasse = null;
+		String acao = request.getParameter("acao");
 		
 		try {
-			String acao = request.getParameter("acao");
 			
 			String acaoNomeClasse = Constantes.URL_ACTION + acao;
 			
@@ -50,6 +50,7 @@ public class ControladorServlet extends HttpServlet {
 		}catch (DceException e){
 			request.setAttribute("msgErro", e.getMessage());
 			if(request.getSession().getAttribute("usuario") != null){
+				request.setAttribute("acao", acao);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/erro.jsp");
 				dispatcher.forward(request, response);
 			}else{
