@@ -88,4 +88,8 @@ public class ControladorChamadasDAO extends TransactionManager{
 		}
 		return listaAlunosBean;
 	}
+	
+	public boolean salvarChamada(List<AlunoBean> listaAlunos) throws SQLException, DceException {
+		return true;
+	}
 }

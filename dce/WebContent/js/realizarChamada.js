@@ -15,7 +15,7 @@ function salvar(){
 		document.getElementById("formChamada").acao.value = "ConsultaCalendarioChamadasAction";
 		document.formChamada.submit();
 	}else{
-		alert('A data da chamada não é correspondente com a do dia! Não pode ser Salva.');
+		alert('Não é possível salvar a chamada, pois a data escolhida é diferente do dia atual.');
 	}
 }
 
