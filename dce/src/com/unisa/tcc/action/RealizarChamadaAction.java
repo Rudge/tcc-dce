@@ -1,6 +1,7 @@
 package com.unisa.tcc.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.unisa.tcc.form.AlunoForm;
+import com.unisa.tcc.form.ChamadaForm;
 import com.unisa.tcc.negocio.ControladorChamadas;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.AlunoTo;
@@ -30,8 +32,12 @@ public class RealizarChamadaAction implements InterfaceActionNegocio{
 				alunoForm.setPresenca(alunoTo.isPresenca());
 				listaAlunosForm.add(alunoForm);
 			}
-			
-			request.setAttribute("listaAlunos", listaAlunosForm);
+			HashMap<Integer,ChamadaForm> mapChamadas = (HashMap<Integer,ChamadaForm>)request.getSession().getAttribute("mapChamadas");
+			if(mapChamadas != null){
+				ChamadaForm chamada = mapChamadas.get(new Integer(idChamada));
+				request.setAttribute("chamada", chamada);
+			}
+			request.getSession().setAttribute("listaAlunos", listaAlunosForm);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/realizarChamada.jsp");
 			dispatcher.forward(request, response);
 			
