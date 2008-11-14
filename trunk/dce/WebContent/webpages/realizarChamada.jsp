@@ -8,7 +8,8 @@
 
 
 <%@page import="java.util.Calendar"%>
-<%@page import="java.util.GregorianCalendar"%><html xmlns="http://www.w3.org/1999/xhtml">
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="com.unisa.tcc.form.ChamadaForm"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>DCE</title>
@@ -17,8 +18,8 @@
 <% 
 	List<AlunoForm> listaAlunos= null;
 	ProfessorForm professor = (ProfessorForm)session.getAttribute("usuario");
-	if(request.getAttribute("listaAlunos") != null){
-		listaAlunos = (List<AlunoForm>)request.getAttribute("listaAlunos");
+	if(request.getSession().getAttribute("listaAlunos") != null){
+		listaAlunos = (List<AlunoForm>)request.getSession().getAttribute("listaAlunos");
 	}
 	String data = "";
 	if(session.getAttribute("dataEscolhida") != null){
@@ -34,6 +35,11 @@
 	}
 	GregorianCalendar calendario = new GregorianCalendar();
 	GregorianCalendar calendarioDataEscolhida = new GregorianCalendar(ano, mes, dia);
+	
+	ChamadaForm chamada = null;
+	if(request.getAttribute("chamada") != null){
+		chamada = (ChamadaForm) request.getAttribute("chamada");
+	}
 %>
 </head>
 <body>
@@ -43,6 +49,17 @@
         <div id="principal">
 			<form id="formChamada" name="formChamada" method="post" action="dce.do">
 				<input type="hidden" name="acao" value=""/>
+				<input type="hidden" name="idChamada" value="<%=chamada.getId()%>"/>
+				<label class="labelTitulo">
+				<% 
+					if(chamada != null){ 
+						out.print(chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
+						"º" + chamada.getClasse().getTurma() + " - Sala:" + chamada.getClasse().getDescricaoSala());
+					}
+				%>
+				</label>
+				<br>
+				<br>
 				<table>
 				<%
 					if(listaAlunos != null && !listaAlunos.isEmpty()){%>

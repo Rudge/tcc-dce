@@ -11,8 +11,8 @@ function voltar(){
 }
 
 function salvar(){
-	if(radioDesabilitados != true){
-		document.getElementById("formChamada").acao.value = "ConsultaCalendarioChamadasAction";
+	if(/*radioDesabilitados != */ true){
+		document.getElementById("formChamada").acao.value = "SalvarChamadaAction";
 		document.formChamada.submit();
 	}else{
 		alert('Não é possível salvar a chamada, pois a data escolhida é diferente do dia atual.');

@@ -31,6 +31,7 @@
                   	<input OnClick="ok()" class="botao" type="button" value="OK"/>
                   	<input OnClick="lembrarSenha()" class="botao" type="button" value="Lembrar Senha?"/>
 					<input type="hidden" name="acao" value=""/>
+				</form>
         	</div>
         </div>
         <div id="rodape"/>

@@ -19,6 +19,14 @@ label.labelErro {
 	text-align: center;
 	color: red;
 }
+label.labelTitulo {
+	font-weight:bold;
+	font-size:12px;
+	width:250PX;
+	float:none;
+	text-align:center;
+	color: blue;
+}
 input {
 	padding:2px;
 	margin:7px;

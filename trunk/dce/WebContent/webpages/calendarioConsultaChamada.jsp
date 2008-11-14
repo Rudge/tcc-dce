@@ -4,7 +4,9 @@
 <%@page import="com.unisa.tcc.form.ProfessorForm"%>
 <%@page import="java.util.List"%>
 <%@page import="com.unisa.tcc.form.ChamadaForm"%>
-<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%><html xmlns="http://www.w3.org/1999/xhtml">
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="java.util.HashMap"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>DCE</title>
@@ -20,6 +22,7 @@
 	if(session.getAttribute("dataEscolhida") != null){
 		data = (String) session.getAttribute("dataEscolhida");
 	}
+	HashMap<Integer,ChamadaForm> mapChamadas = new HashMap<Integer,ChamadaForm>();
 %>
 <script type="text/javascript" src="js/consultaChamada.js"></script>
 <script type="text/javascript" src="js/dhtmlSuite-common.js"></script>
@@ -44,8 +47,10 @@
 						out.println("<BR>Aulas: <BR>");
 						for (ChamadaForm chamada : listaChamadas) {
 							out.println("<a onclick=\"escolherChamada("+ chamada.getId() + ")\" href=\"#\" >" + chamada.getHoraAula() + " - " + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
-										"º" + chamada.getClasse().getTurma() + " - " + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>"); 
+										"º" + chamada.getClasse().getTurma() + " - Sala:" + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>");
+							mapChamadas.put(chamada.getId(),chamada);
 						}
+						request.getSession().setAttribute("mapChamadas",mapChamadas);
 					}
 				%>
 			</form>
