@@ -11,7 +11,7 @@ function voltar(){
 }
 
 function salvar(){
-	if(/*radioDesabilitados != */ true){
+	if(radioDesabilitados !=  true){
 		document.getElementById("formChamada").acao.value = "SalvarChamadaAction";
 		document.formChamada.submit();
 	}else{

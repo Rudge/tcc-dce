@@ -23,7 +23,8 @@ public class ControladorChamadasDAO extends TransactionManager{
 		StringBuffer query = new StringBuffer();
 		try{
 			conn = getConn();
-			query.append("SELECT DISTINCT CH.IDCHAMADA, DIS.NOME AS DISCIPLINA, CL.SERIE_SERIE, CL.SERIE_TURMA, CL.DESCRICAO_SALA ");
+			query.append("SELECT DISTINCT CH.IDCHAMADA, DIS.NOME AS DISCIPLINA, CL.SERIE_SERIE, ");
+			query.append("CL.SERIE_TURMA, CL.DESCRICAO_SALA, CH.HORA_AULA ");
 			query.append("FROM CHAMADA CH, CLASSE_CHAMADA CLCH, CLASSE CL, DISCIPLINAS DIS ");
 			query.append("WHERE CLCH.CHAMADA_IDCHAMADA = CH.IDCHAMADA ");
 			query.append("AND CL.IDCLASSE = CLCH.CLASSE_IDCLASSE ");
@@ -47,6 +48,7 @@ public class ControladorChamadasDAO extends TransactionManager{
 				classe.setTurma(rs.getString("SERIE_TURMA").charAt(0));
 				classe.setDescricaoSala(rs.getString("DESCRICAO_SALA"));
 				chamadaBean.setId(rs.getInt("IDCHAMADA"));
+				chamadaBean.setHoraAula(rs.getString("HORA_AULA"));
 				chamadaBean.setClasse(classe);
 				chamadaBean.setDisciplina(disciplina);
 				listaChamadas.add(chamadaBean);
