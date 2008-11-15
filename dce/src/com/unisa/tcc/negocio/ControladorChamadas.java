@@ -44,6 +44,7 @@ public class ControladorChamadas {
 				classe.setTurma(chamadaBean.getClasse().getTurma());
 				classe.setDescricaoSala(chamadaBean.getClasse().getDescricaoSala());
 				chamadaTo.setId(chamadaBean.getId());
+				chamadaTo.setHoraAula(chamadaBean.getHoraAula());
 				chamadaTo.setClasse(classe);
 				chamadaTo.setDisciplina(disciplina);
 				listaChamadasTo.add(chamadaTo);
