@@ -2,12 +2,19 @@ package com.unisa.tcc.to;
 
 public class ClasseTo {
 
+	private int id;
 	private int serie;
 	private String periodo;
 	private int ano;
 	private char turma;
 	private String descricaoSala;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getDescricaoSala() {
 		return descricaoSala;
 	}

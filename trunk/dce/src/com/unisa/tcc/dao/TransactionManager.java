@@ -14,6 +14,7 @@ public class TransactionManager {
 		try {
 			carregarDriver();
 			conn = obtemConexao();
+			conn.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			throw new DceException("Erro ao carregar o driver do Mysql!");
 		} catch (SQLException e) {

@@ -23,7 +23,7 @@
         </div>
         <div id="principal">
 			<div id="frmLogin">
-				<form id="formErro">
+				<form id="formErro" name="formErro">
 					<span id="sair">
 						<a onclick="sair()" href="#"><img style="float: right; border:0;" alt="SAIR" src="imagens/sair.jpg"/></a>
 					</span>

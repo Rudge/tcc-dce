@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 
 import com.unisa.tcc.bean.AlunoBean;
@@ -24,7 +25,7 @@ public class ControladorChamadasDAO extends TransactionManager{
 		try{
 			conn = getConn();
 			query.append("SELECT DISTINCT CH.IDCHAMADA, DIS.NOME AS DISCIPLINA, CL.SERIE_SERIE, ");
-			query.append("CL.SERIE_TURMA, CL.DESCRICAO_SALA, CH.HORA_AULA ");
+			query.append("CL.SERIE_TURMA, CL.DESCRICAO_SALA, CH.HORA_AULA, CL.IDCLASSE ");
 			query.append("FROM CHAMADA CH, CLASSE_CHAMADA CLCH, CLASSE CL, DISCIPLINAS DIS ");
 			query.append("WHERE CLCH.CHAMADA_IDCHAMADA = CH.IDCHAMADA ");
 			query.append("AND CL.IDCLASSE = CLCH.CLASSE_IDCLASSE ");
@@ -44,6 +45,7 @@ public class ControladorChamadasDAO extends TransactionManager{
 				ClasseBean classe = new ClasseBean();
 				ChamadaBean chamadaBean = new ChamadaBean();
 				disciplina.setNome(rs.getString("DISCIPLINA"));
+				classe.setId(rs.getInt("IDCLASSE"));
 				classe.setSerie(rs.getInt("SERIE_SERIE"));
 				classe.setTurma(rs.getString("SERIE_TURMA").charAt(0));
 				classe.setDescricaoSala(rs.getString("DESCRICAO_SALA"));
@@ -61,7 +63,7 @@ public class ControladorChamadasDAO extends TransactionManager{
 		return listaChamadas;
 	}
 	
-	public List<AlunoBean> consultarAlunosChamada(int idChamada) throws SQLException, DceException {
+	public List<AlunoBean> consultarAlunosChamada(int idChamada, int idClasse) throws SQLException, DceException {
 		List<AlunoBean> listaAlunosBean = new ArrayList<AlunoBean>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -71,10 +73,12 @@ public class ControladorChamadasDAO extends TransactionManager{
 			query.append("SELECT AL.NOME, AL.MATRICULA, CLCH.PRESENCA " +
 						 "FROM CLASSE_CHAMADA CLCH, ALUNO AL " +
 						 "WHERE CLCH.CHAMADA_IDCHAMADA = ? " +
-						 "AND AL.MATRICULA = CLCH.ALUNO_MATRICULA " +
+						 " AND CLCH.CLASSE_IDCLASSE = ? " +
+						 " AND AL.MATRICULA = CLCH.ALUNO_MATRICULA " +
 						 "ORDER BY NOME ASC ");
 			stmt = conn.prepareStatement(query.toString());
 			stmt.setInt(1, idChamada);
+			stmt.setInt(2, idClasse);
 			rs = stmt.executeQuery();
 			while(rs.next()){
 				AlunoBean aluno = new AlunoBean();
@@ -93,23 +97,35 @@ public class ControladorChamadasDAO extends TransactionManager{
 	
 	public boolean salvarChamada(List<AlunoBean> listaAlunos, int idChamada, int idClasse) throws SQLException, DceException {
 		PreparedStatement stmt = null;
-		ResultSet rs = null;
+		int resultado = 0;
+		boolean comResultado = true;
 		try{
 			StringBuffer query = new StringBuffer();
 			conn = getConn();
-			query.append("SELECT AL.NOME, AL.MATRICULA, CLCH.PRESENCA " +
-						 "FROM CLASSE_CHAMADA CLCH, ALUNO AL " +
-						 "WHERE CLCH.CHAMADA_IDCHAMADA = ? " +
-						 "AND AL.MATRICULA = CLCH.ALUNO_MATRICULA " +
-						 "ORDER BY NOME ASC ");
+			query.append("UPDATE CLASSE_CHAMADA SET PRESENCA = ?  WHERE ALUNO_MATRICULA= ? " +
+						 "AND CHAMADA_IDCHAMADA = ? AND CLASSE_IDCLASSE = ?");
 			stmt = conn.prepareStatement(query.toString());
-			stmt.setInt(1, idChamada);
-			rs = stmt.executeQuery();
+			stmt.setInt(3, idChamada);
+			stmt.setInt(4, idClasse);
+			Iterator<AlunoBean> itrListaAlunos = listaAlunos.iterator();
+			while (itrListaAlunos.hasNext() && comResultado){
+				AlunoBean aluno = itrListaAlunos.next();
+				stmt.setBoolean(1, aluno.isPresenca());
+				stmt.setInt(2, aluno.getMatricula());
+				resultado = stmt.executeUpdate();
+				if(resultado == 0){
+					comResultado = false;
+				}
+			}
+			if(comResultado){
+				conn.commit();
+			}else{
+				conn.rollback();
+			}
 		}finally{
-			rs.close();
 			stmt.close();
 			conn.close();
 		}
-		return true;
+		return comResultado;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,11 +19,16 @@ import com.unisa.tcc.propriedades.DceException;
 		// TODO Auto-generated method stub
 		try{
 			String idChamada = request.getParameter("idChamada");
+			String idClasse = request.getParameter("idClasse");
 			List<AlunoForm> listaAlunos= null;
 			listaAlunos = (List<AlunoForm>)request.getSession().getAttribute("listaAlunos");
 			listaAlunos = listarAlunosPresenca(listaAlunos, request);
-			controladorChamada.salvarChamada(listaAlunos, idChamada, idChamada);
-			
+			boolean retorno = controladorChamada.salvarChamada(listaAlunos, idChamada, idClasse);
+			if(retorno){
+				request.setAttribute("msgSucesso", "Foi atualizada a chamada com sucesso!");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
+				dispatcher.forward(request, response);
+			}
 		}catch (Exception e) {
 			throw new DceException("Erro na requisição ou resposta da página de login!");
 		}

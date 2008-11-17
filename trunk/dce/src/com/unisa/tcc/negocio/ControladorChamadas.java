@@ -41,6 +41,7 @@ public class ControladorChamadas {
 				ClasseTo classe = new ClasseTo();
 				DisciplinaTo disciplina = new DisciplinaTo();
 				disciplina.setNome(chamadaBean.getDisciplina().getNome());
+				classe.setId(chamadaBean.getClasse().getId());
 				classe.setSerie(chamadaBean.getClasse().getSerie());
 				classe.setTurma(chamadaBean.getClasse().getTurma());
 				classe.setDescricaoSala(chamadaBean.getClasse().getDescricaoSala());
@@ -56,11 +57,11 @@ public class ControladorChamadas {
 		return listaChamadasTo;
 	}
 	
-	public List<AlunoTo> consultarAlunosChamada(String idChamada) throws DceException{
+	public List<AlunoTo> consultarAlunosChamada(String idChamada, String idClasse) throws DceException{
 		
 		List<AlunoTo> listaAlunosTo = new ArrayList<AlunoTo>();
 		try{
-			List<AlunoBean> listaAlunosBean = controladorChamadasDAO.consultarAlunosChamada(new Integer(idChamada));
+			List<AlunoBean> listaAlunosBean = controladorChamadasDAO.consultarAlunosChamada(new Integer(idChamada), new Integer(idClasse));
 			
 			for (AlunoBean alunoBean : listaAlunosBean) {
 				AlunoTo alunoTo = new AlunoTo();
@@ -85,6 +86,7 @@ public class ControladorChamadas {
 			ClasseForm classe = new ClasseForm();
 			DisciplinaForm disciplina = new DisciplinaForm();
 			disciplina.setNome(chamadaTo.getDisciplina().getNome());
+			classe.setId(chamadaTo.getClasse().getId());
 			classe.setSerie(chamadaTo.getClasse().getSerie());
 			classe.setTurma(chamadaTo.getClasse().getTurma());
 			classe.setDescricaoSala(chamadaTo.getClasse().getDescricaoSala());
@@ -98,10 +100,11 @@ public class ControladorChamadas {
 		return listaChamadasForm;
 	}
 	
-	public void salvarChamada(List<AlunoForm> listaAlunosForm, String idChamada, String idClasse) throws DceException{
+	public boolean salvarChamada(List<AlunoForm> listaAlunosForm, String idChamada, String idClasse) throws DceException{
 		
-		try{
-			
+		boolean retorno = true;
+		
+		try{			
 			List<AlunoBean> listaAlunosBean = new ArrayList<AlunoBean>();
 			int idCh = new Integer(idChamada);
 			int idClas = new Integer(idClasse);
@@ -114,10 +117,14 @@ public class ControladorChamadas {
 				listaAlunosBean.add(alunoBean);
 			}
 			
-			boolean retorno = controladorChamadasDAO.salvarChamada(listaAlunosBean, idCh, idClas);
-		
+			retorno = controladorChamadasDAO.salvarChamada(listaAlunosBean, idCh, idClas);
+			
+			if(!retorno){
+				throw new DceException("Não foi possível atualizar a chamada!");
+			}
 		}catch (SQLException e) {
 			throw new DceException("Erro ao tentar salvar a chamada!");
 		}
+		return retorno;
 	}
 }
