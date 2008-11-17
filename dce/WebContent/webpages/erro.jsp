@@ -15,6 +15,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>DCE</title>
 <link href="estilos/estilo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/erro.js"></script>
 </head>
 <body>
     <div id="container">
@@ -22,7 +23,10 @@
         </div>
         <div id="principal">
 			<div id="frmLogin">
-				<form>
+				<form id="formErro">
+					<span id="sair">
+						<a onclick="sair()" href="#"><img style="float: right; border:0;" alt="SAIR" src="imagens/sair.jpg"/></a>
+					</span>
 					<input type="hidden" id="acao" name="acao" value="<%=acao%>"/>
 					<label class="labelErro"><%=erro%></label>
 					<br>

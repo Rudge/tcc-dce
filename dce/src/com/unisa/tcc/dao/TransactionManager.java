@@ -30,7 +30,7 @@ public class TransactionManager {
 		//return DriverManager.getConnection("jdbc:jtds:sqlserver://CHICOBENTO/ra1262009","aluno","aluno");
 		//return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","system");
 		//return DriverManager.getConnection("jdbc:mysql://localhost:3307/rudge", "rudge", "My$&rverjava2008");
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/tcc", "root", "root");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3308/tcc", "root", "root");
 	}
 	
 }

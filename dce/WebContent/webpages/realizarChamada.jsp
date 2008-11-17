@@ -30,11 +30,11 @@
 	if(data != null && !"".equals(data)){
 		String[] arrData = data.split("-");
 		ano = Integer.parseInt(arrData[0]);
-		mes = Integer.parseInt(arrData[1]) - 1;
+		mes = Integer.parseInt(arrData[1]);
 		dia = Integer.parseInt(arrData[2]);
 	}
 	GregorianCalendar calendario = new GregorianCalendar();
-	GregorianCalendar calendarioDataEscolhida = new GregorianCalendar(ano, mes, dia);
+	GregorianCalendar calendarioDataEscolhida = new GregorianCalendar(ano, mes-1, dia);
 	
 	ChamadaForm chamada = null;
 	if(request.getAttribute("chamada") != null){
@@ -48,13 +48,17 @@
         </div>
         <div id="principal">
 			<form id="formChamada" name="formChamada" method="post" action="dce.do">
+				<span id="sair" style="width:365px;">
+					<a onclick="sair()" href="#"><img style="float: right; border:0;" alt="SAIR" src="imagens/sair.jpg"/></a>
+				</span>
 				<input type="hidden" name="acao" value=""/>
 				<input type="hidden" name="idChamada" value="<%=chamada.getId()%>"/>
 				<label class="labelTitulo">
 				<% 
 					if(chamada != null){ 
 						out.print(chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
-						"º" + chamada.getClasse().getTurma() + " - Sala:" + chamada.getClasse().getDescricaoSala());
+						"º" + chamada.getClasse().getTurma() + " - Sala:" + chamada.getClasse().getDescricaoSala() 
+						+ " - " + dia + "/" + mes + "/" + ano);
 					}
 				%>
 				</label>
@@ -62,14 +66,21 @@
 				<br>
 				<table>
 				<%
-					if(listaAlunos != null && !listaAlunos.isEmpty()){%>
-					   <tr>
+					if(listaAlunos != null && !listaAlunos.isEmpty()){
+						int corLinha = 0;
+					%>
+						<tr>
 							<th>Presença</th>
 							<th>Matricula</th>
 							<th>Nome</th>
 					   </tr>
-					   <% for (AlunoForm aluno : listaAlunos) {%>
+					   <% for (AlunoForm aluno : listaAlunos) {
+					   	if(corLinha % 2 == 0){
+					   %>
+						<tr style="background:#DCDCDC">
+						<%}else{%>
 						<tr>
+						<%}%>
 							<td>SIM<input type="radio" id="<%=aluno.getMatricula()%>presenca" name="chamada<%=aluno.getMatricula()%>" value="true"/>
 							NÃO<input type="radio" id="<%=aluno.getMatricula()%>falta" name="chamada<%=aluno.getMatricula()%>" value="false"/></td>
 						<%
@@ -82,7 +93,7 @@
 									marcarOpcaoRadio(<%=aluno.getMatricula()%> + "falta");
 								</script>
 						<%	} 
-							if(!calendario.getTime().equals(calendarioDataEscolhida.getTime())){%>
+							if(calendarioDataEscolhida.before(calendario) || calendarioDataEscolhida.after(calendario)){%>
 								<script>
 									desabilitarOpcaoRadio(<%=aluno.getMatricula()%>);
 								</script>
@@ -90,7 +101,8 @@
 							<td><%=aluno.getMatricula()%></td>
 							<td><%=aluno.getNome()%></td>
 						</tr>
-					  <%}
+					  <% corLinha++;
+					   }
 					}
 				%>
 				</table>

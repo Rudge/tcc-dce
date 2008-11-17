@@ -91,7 +91,25 @@ public class ControladorChamadasDAO extends TransactionManager{
 		return listaAlunosBean;
 	}
 	
-	public boolean salvarChamada(List<AlunoBean> listaAlunos) throws SQLException, DceException {
+	public boolean salvarChamada(List<AlunoBean> listaAlunos, int idChamada, int idClasse) throws SQLException, DceException {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try{
+			StringBuffer query = new StringBuffer();
+			conn = getConn();
+			query.append("SELECT AL.NOME, AL.MATRICULA, CLCH.PRESENCA " +
+						 "FROM CLASSE_CHAMADA CLCH, ALUNO AL " +
+						 "WHERE CLCH.CHAMADA_IDCHAMADA = ? " +
+						 "AND AL.MATRICULA = CLCH.ALUNO_MATRICULA " +
+						 "ORDER BY NOME ASC ");
+			stmt = conn.prepareStatement(query.toString());
+			stmt.setInt(1, idChamada);
+			rs = stmt.executeQuery();
+		}finally{
+			rs.close();
+			stmt.close();
+			conn.close();
+		}
 		return true;
 	}
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.unisa.tcc.form.ChamadaForm;
 import com.unisa.tcc.form.ProfessorForm;
-import com.unisa.tcc.negocio.ControladorChamadas;
 import com.unisa.tcc.negocio.Login;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.ChamadaTo;
@@ -28,9 +27,8 @@ import com.unisa.tcc.to.ChamadaTo;
 				professorForm.setSenha(request.getParameter("senha"));
 				autenticado = login.autenticarProfessor(professorForm);
 				if(autenticado){
-					ControladorChamadas controlador = new ControladorChamadas();
-					List<ChamadaTo> listaChamadasTo = controlador.consultarChamadasPorData(professorForm.getId(), null);
-					List<ChamadaForm>listaChamadasForm = controlador.tranfListaChamadaTo(listaChamadasTo);
+					List<ChamadaTo> listaChamadasTo = controladorChamada.consultarChamadasPorData(professorForm.getId(), null);
+					List<ChamadaForm>listaChamadasForm = controladorChamada.tranfListaChamadaTo(listaChamadasTo);
 					request.setAttribute("listaChamadas", listaChamadasForm);
 					request.getSession().setAttribute("usuario", professorForm);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");

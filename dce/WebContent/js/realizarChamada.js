@@ -26,3 +26,8 @@ function desabilitarOpcaoRadio(matricula) {
 	eval(elementoRadioFalta);
 	radioDesabilitados = true;
 }
+
+function sair(){
+	document.getElementById("formChamada").acao.value = "SairAction";
+	document.formChamada.submit();
+}

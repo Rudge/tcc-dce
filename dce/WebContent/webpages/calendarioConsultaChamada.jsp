@@ -36,18 +36,21 @@
         </div>
         <div id="principal">
 			<form id="formCalendar" name="formCalendar" method="post" action="dce.do">
+				<span id="sair">
+					<a onclick="sair()" href="#"><img style="float: right; border:0;" alt="SAIR" src="imagens/sair.jpg"/></a>
+				</span>
             	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value="<%=data%>"/>
 				<input type="hidden" name="acao" value="ConsultaCalendarioChamadasAction"/>
 				<input type="hidden" id="idChamada" name="idChamada" value="" />
-				Olá, Professor <%=professor.getNome()%>.
 				<div id="calendario">
+					Olá, Professor <%=professor.getNome()%>.
 				</div>
 				<%
 					if(listaChamadas != null && !listaChamadas.isEmpty()){
 						out.println("<BR>Aulas: <BR>");
 						for (ChamadaForm chamada : listaChamadas) {
 							out.println("<a onclick=\"escolherChamada("+ chamada.getId() + ")\" href=\"#\" >" + chamada.getHoraAula() + " - " + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
-										"º" + chamada.getClasse().getTurma() + " - Sala:" + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>");
+										"º" + chamada.getClasse().getTurma() + " - Sala: " + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>");
 							mapChamadas.put(chamada.getId(),chamada);
 						}
 						request.getSession().setAttribute("mapChamadas",mapChamadas);

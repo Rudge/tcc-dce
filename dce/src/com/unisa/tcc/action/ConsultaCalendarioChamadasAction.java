@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.unisa.tcc.form.ChamadaForm;
 import com.unisa.tcc.form.ProfessorForm;
-import com.unisa.tcc.negocio.ControladorChamadas;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.ChamadaTo;
 
@@ -24,9 +23,8 @@ public class ConsultaCalendarioChamadasAction implements InterfaceActionNegocio{
 			}else{
 				data = (String) request.getSession().getAttribute("dataEscolhida");
 			}
-			ControladorChamadas controladorChamadas = new ControladorChamadas();
-			List<ChamadaTo> listaChamadasTo = controladorChamadas.consultarChamadasPorData(professor.getId(), data);
-			List<ChamadaForm> listaChamadasForm = controladorChamadas.tranfListaChamadaTo(listaChamadasTo);
+			List<ChamadaTo> listaChamadasTo = controladorChamada.consultarChamadasPorData(professor.getId(), data);
+			List<ChamadaForm> listaChamadasForm = controladorChamada.tranfListaChamadaTo(listaChamadasTo);
 			request.setAttribute("listaChamadas", listaChamadasForm);
 			request.getSession().setAttribute("dataEscolhida", data);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
