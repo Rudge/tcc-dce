@@ -9,14 +9,15 @@
 
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.GregorianCalendar"%>
-<%@page import="com.unisa.tcc.form.ChamadaForm"%><html xmlns="http://www.w3.org/1999/xhtml">
+<%@page import="com.unisa.tcc.form.ChamadaForm"%>
+<%@page import="java.util.Date"%><html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>DCE</title>
 <script type="text/javascript" src="js/realizarChamada.js"></script>
 <link href="estilos/estilo.css" rel="stylesheet" type="text/css" />
-<% 
-	List<AlunoForm> listaAlunos= null;
+<%
+	List<AlunoForm> listaAlunos = null;
 	ProfessorForm professor = (ProfessorForm)session.getAttribute("usuario");
 	if(request.getSession().getAttribute("listaAlunos") != null){
 		listaAlunos = (List<AlunoForm>)request.getSession().getAttribute("listaAlunos");
@@ -33,8 +34,8 @@
 		mes = Integer.parseInt(arrData[1]);
 		dia = Integer.parseInt(arrData[2]);
 	}
-	GregorianCalendar calendario = new GregorianCalendar();
-	GregorianCalendar calendarioDataEscolhida = new GregorianCalendar(ano, mes-1, dia);
+	
+	Calendar calendario = Calendar.getInstance();
 	
 	ChamadaForm chamada = null;
 	if(request.getAttribute("chamada") != null){
@@ -53,6 +54,7 @@
 				</span>
 				<input type="hidden" name="acao" value=""/>
 				<input type="hidden" name="idChamada" value="<%=chamada.getId()%>"/>
+				<input type="hidden" name="idClasse" value="<%=chamada.getClasse().getId()%>"/>
 				<label class="labelTitulo">
 				<% 
 					if(chamada != null){ 
@@ -93,7 +95,9 @@
 									marcarOpcaoRadio(<%=aluno.getMatricula()%> + "falta");
 								</script>
 						<%	} 
-							if(calendarioDataEscolhida.before(calendario) || calendarioDataEscolhida.after(calendario)){%>
+							if( calendario.get(Calendar.DAY_OF_MONTH) != dia || 
+								calendario.get(Calendar.MONTH) != mes-1 ||
+							    calendario.get(Calendar.YEAR) != ano){%>
 								<script>
 									desabilitarOpcaoRadio(<%=aluno.getMatricula()%>);
 								</script>

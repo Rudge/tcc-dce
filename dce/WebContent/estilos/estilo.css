@@ -94,13 +94,9 @@ input.botao {
 	background: #CCC url("../imagens/footer.jpg") no-repeat center top;
 	height: 50px;	
 }
-#formChamada{
-	text-align:center;
-	width:330px;
-	margin:auto;	
-}
 table{
 	border-collapse:collapse;
+	margin: auto;
 } 
 td{
 	padding:0;

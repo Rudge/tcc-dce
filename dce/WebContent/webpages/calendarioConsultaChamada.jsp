@@ -23,6 +23,11 @@
 		data = (String) session.getAttribute("dataEscolhida");
 	}
 	HashMap<Integer,ChamadaForm> mapChamadas = new HashMap<Integer,ChamadaForm>();
+	
+	String msgSucesso = "";
+	if(request.getAttribute("msgSucesso") != null){
+		msgSucesso = (String) request.getAttribute("msgSucesso");
+	}
 %>
 <script type="text/javascript" src="js/consultaChamada.js"></script>
 <script type="text/javascript" src="js/dhtmlSuite-common.js"></script>
@@ -36,12 +41,14 @@
         </div>
         <div id="principal">
 			<form id="formCalendar" name="formCalendar" method="post" action="dce.do">
+				<!-- <label><%= msgSucesso%><label> -->
 				<span id="sair">
 					<a onclick="sair()" href="#"><img style="float: right; border:0;" alt="SAIR" src="imagens/sair.jpg"/></a>
 				</span>
             	<input type="hidden" id="dataEscolhida" name="dataEscolhida" value="<%=data%>"/>
 				<input type="hidden" name="acao" value="ConsultaCalendarioChamadasAction"/>
 				<input type="hidden" id="idChamada" name="idChamada" value="" />
+				<input type="hidden" id="idClasse" name="idClasse" value="" />
 				<div id="calendario">
 					Olá, Professor <%=professor.getNome()%>.
 				</div>
@@ -49,7 +56,7 @@
 					if(listaChamadas != null && !listaChamadas.isEmpty()){
 						out.println("<BR>Aulas: <BR>");
 						for (ChamadaForm chamada : listaChamadas) {
-							out.println("<a onclick=\"escolherChamada("+ chamada.getId() + ")\" href=\"#\" >" + chamada.getHoraAula() + " - " + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
+							out.println("<a onclick=\"escolherChamada("+ chamada.getId() + ","+ chamada.getClasse().getId() + ")\" href=\"#\" >" + chamada.getHoraAula() + " - " + chamada.getDisciplina().getNome() + " - " + chamada.getClasse().getSerie() + 
 										"º" + chamada.getClasse().getTurma() + " - Sala: " + chamada.getClasse().getDescricaoSala() + "</a>" + "<br>");
 							mapChamadas.put(chamada.getId(),chamada);
 						}

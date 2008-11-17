@@ -20,7 +20,8 @@ public class RealizarChamadaAction implements InterfaceActionNegocio{
 		
 		try{
 			String idChamada = request.getParameter("idChamada");
-			List<AlunoTo> listaAlunosTo = controladorChamada.consultarAlunosChamada(idChamada);
+			String idClasse = request.getParameter("idClasse");
+			List<AlunoTo> listaAlunosTo = controladorChamada.consultarAlunosChamada(idChamada, idClasse);
 			List<AlunoForm> listaAlunosForm = new ArrayList<AlunoForm>();
 	
 			for (AlunoTo alunoTo : listaAlunosTo) {
