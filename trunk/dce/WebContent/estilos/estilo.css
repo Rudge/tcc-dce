@@ -99,4 +99,16 @@ input.botao {
 	width:330px;
 	margin:auto;	
 }
+table{
+	border-collapse:collapse;
+} 
+td{
+	padding:0;
+}
+#sair{
+	margin: auto; 
+	overflow: hidden; 
+	width: 220px; 
+	position: absolute;
+}
 

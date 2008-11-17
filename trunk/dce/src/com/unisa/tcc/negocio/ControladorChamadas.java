@@ -7,6 +7,7 @@ import java.util.List;
 import com.unisa.tcc.bean.AlunoBean;
 import com.unisa.tcc.bean.ChamadaBean;
 import com.unisa.tcc.dao.ControladorChamadasDAO;
+import com.unisa.tcc.form.AlunoForm;
 import com.unisa.tcc.form.ChamadaForm;
 import com.unisa.tcc.form.ClasseForm;
 import com.unisa.tcc.form.DisciplinaForm;
@@ -88,11 +89,35 @@ public class ControladorChamadas {
 			classe.setTurma(chamadaTo.getClasse().getTurma());
 			classe.setDescricaoSala(chamadaTo.getClasse().getDescricaoSala());
 			chamadaForm.setId(chamadaTo.getId());
+			chamadaForm.setHoraAula(chamadaTo.getHoraAula());
 			chamadaForm.setClasse(classe);
 			chamadaForm.setDisciplina(disciplina);
 			listaChamadasForm.add(chamadaForm);
 		}
 		
 		return listaChamadasForm;
+	}
+	
+	public void salvarChamada(List<AlunoForm> listaAlunosForm, String idChamada, String idClasse) throws DceException{
+		
+		try{
+			
+			List<AlunoBean> listaAlunosBean = new ArrayList<AlunoBean>();
+			int idCh = new Integer(idChamada);
+			int idClas = new Integer(idClasse);
+	
+			for (AlunoForm alunoForm : listaAlunosForm) {
+				AlunoBean alunoBean = new AlunoBean();
+				alunoBean.setMatricula(alunoForm.getMatricula());
+				alunoBean.setNome(alunoForm.getNome());
+				alunoBean.setPresenca(alunoForm.isPresenca());
+				listaAlunosBean.add(alunoBean);
+			}
+			
+			boolean retorno = controladorChamadasDAO.salvarChamada(listaAlunosBean, idCh, idClas);
+		
+		}catch (SQLException e) {
+			throw new DceException("Erro ao tentar salvar a chamada!");
+		}
 	}
 }

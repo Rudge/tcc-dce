@@ -1,7 +1,6 @@
 package com.unisa.tcc.action;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,10 +19,10 @@ import com.unisa.tcc.propriedades.DceException;
 		try{
 			String idChamada = request.getParameter("idChamada");
 			List<AlunoForm> listaAlunos= null;
-			if(request.getSession().getAttribute("listaAlunos") != null){
-				listaAlunos = (List<AlunoForm>)request.getSession().getAttribute("listaAlunos");
-				listaAlunos = listarAlunosPresenca(listaAlunos, request);
-			}
+			listaAlunos = (List<AlunoForm>)request.getSession().getAttribute("listaAlunos");
+			listaAlunos = listarAlunosPresenca(listaAlunos, request);
+			controladorChamada.salvarChamada(listaAlunos, idChamada, idChamada);
+			
 		}catch (Exception e) {
 			throw new DceException("Erro na requisição ou resposta da página de login!");
 		}

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.unisa.tcc.form.AlunoForm;
 import com.unisa.tcc.form.ChamadaForm;
-import com.unisa.tcc.negocio.ControladorChamadas;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.AlunoTo;
 
@@ -21,8 +20,7 @@ public class RealizarChamadaAction implements InterfaceActionNegocio{
 		
 		try{
 			String idChamada = request.getParameter("idChamada");
-			ControladorChamadas controladorChamadas = new ControladorChamadas();
-			List<AlunoTo> listaAlunosTo = controladorChamadas.consultarAlunosChamada(idChamada);
+			List<AlunoTo> listaAlunosTo = controladorChamada.consultarAlunosChamada(idChamada);
 			List<AlunoForm> listaAlunosForm = new ArrayList<AlunoForm>();
 	
 			for (AlunoTo alunoTo : listaAlunosTo) {
