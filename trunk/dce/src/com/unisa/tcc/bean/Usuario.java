@@ -1,6 +1,12 @@
 package com.unisa.tcc.bean;
 
-public abstract class Usuario {
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1541723203590284902L;
 	private int id;
 	private String nome;
 	private String usuario;

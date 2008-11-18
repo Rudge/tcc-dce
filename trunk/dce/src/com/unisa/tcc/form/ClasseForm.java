@@ -1,7 +1,13 @@
 package com.unisa.tcc.form;
 
-public class ClasseForm {
+import java.io.Serializable;
+
+public class ClasseForm implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4626684110966015932L;
 	private int id;
 	private int serie;
 	private String periodo;

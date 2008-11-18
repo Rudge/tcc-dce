@@ -1,6 +1,12 @@
 package com.unisa.tcc.form;
 
-public class AlunoForm {
+import java.io.Serializable;
+
+public class AlunoForm implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4376678328193775925L;
 	private int matricula;
 	private String Nome;
 	private boolean presenca;

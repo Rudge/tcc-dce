@@ -41,7 +41,6 @@
         </div>
         <div id="principal">
 			<form id="formCalendar" name="formCalendar" method="post" action="dce.do">
-				<!-- <label><%= msgSucesso%><label> -->
 				<span id="sair">
 					<a onclick="sair()" href="#"><img style="float: right; border:0;" alt="SAIR" src="imagens/sair.jpg"/></a>
 				</span>
@@ -64,6 +63,7 @@
 					}
 				%>
 			</form>
+			<label class="labelTitulo"><%=msgSucesso%></label>
         </div>
     	<div id="rodape">
 		</div>	

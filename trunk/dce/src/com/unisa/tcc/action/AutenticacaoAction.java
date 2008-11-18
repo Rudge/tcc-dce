@@ -1,5 +1,6 @@
 package com.unisa.tcc.action;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -31,6 +32,7 @@ import com.unisa.tcc.to.ChamadaTo;
 					List<ChamadaForm>listaChamadasForm = controladorChamada.tranfListaChamadaTo(listaChamadasTo);
 					request.setAttribute("listaChamadas", listaChamadasForm);
 					request.getSession().setAttribute("usuario", professorForm);
+					request.getSession().setAttribute("dataEscolhida", new Date(new java.util.Date().getTime()).toString());
 					RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
 					dispatcher.forward(request, response);
 				}else{
