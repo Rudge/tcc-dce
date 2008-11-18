@@ -1,10 +1,15 @@
 package com.unisa.tcc.form;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class ChamadaForm {
+public class ChamadaForm implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4160115739998396954L;
 	private int id;
 	private List<AlunoForm> listaAlunos;
 	private GregorianCalendar data;

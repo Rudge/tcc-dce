@@ -15,6 +15,7 @@ import com.unisa.tcc.to.AlunoTo;
 
 public class RealizarChamadaAction implements InterfaceActionNegocio{
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void executar(HttpServletRequest request, HttpServletResponse response) throws DceException {
 		

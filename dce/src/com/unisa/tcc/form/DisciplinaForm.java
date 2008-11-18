@@ -1,7 +1,13 @@
 package com.unisa.tcc.form;
 
-public class DisciplinaForm {
+import java.io.Serializable;
+
+public class DisciplinaForm implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6334793254202066971L;
 	private int id;
 	private String Nome;
 	private ProfessorForm professor;
