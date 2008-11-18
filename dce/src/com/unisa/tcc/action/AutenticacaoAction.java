@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.unisa.tcc.form.ChamadaForm;
 import com.unisa.tcc.form.ProfessorForm;
 import com.unisa.tcc.negocio.Login;
+import com.unisa.tcc.propriedades.Constantes;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.ChamadaTo;
 
@@ -23,7 +24,7 @@ import com.unisa.tcc.to.ChamadaTo;
 			Login login = new Login();
 			boolean autenticado = false;
 			ProfessorForm professorForm = new ProfessorForm();
-			if(request.getParameter("tipoUsuario").equals("professor")){
+			if(request.getParameter("tipoUsuario").equals(Constantes.TIPO_PROFESSOR)){
 				professorForm.setUsuario(request.getParameter("usuario"));
 				professorForm.setSenha(request.getParameter("senha"));
 				autenticado = login.autenticarProfessor(professorForm);
@@ -33,21 +34,21 @@ import com.unisa.tcc.to.ChamadaTo;
 					request.setAttribute("listaChamadas", listaChamadasForm);
 					request.getSession().setAttribute("usuario", professorForm);
 					request.getSession().setAttribute("dataEscolhida", new Date(new java.util.Date().getTime()).toString());
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.PAGINA_CALENDARIO_CHAMADA);
 					dispatcher.forward(request, response);
 				}else{
-					request.setAttribute("msgErro", "Usuário ou senha inválidos!");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+					request.setAttribute("msgErro", Constantes.ERRO_USUARIO_SENHA);
+					RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.PAGINA_INDEX);
 					dispatcher.forward(request, response);
 				}
 			}else{
 				if(autenticado){
 					request.getSession().setAttribute("usuario", professorForm);
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/calendarioConsultaChamada.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.PAGINA_CALENDARIO_CHAMADA);
 					dispatcher.forward(request, response);
 				}else{
-					request.setAttribute("msgErro", "Usuário ou senha inválidos!");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+					request.setAttribute("msgErro", Constantes.ERRO_USUARIO_SENHA);
+					RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.PAGINA_INDEX);
 					dispatcher.forward(request, response);
 				}
 			}
