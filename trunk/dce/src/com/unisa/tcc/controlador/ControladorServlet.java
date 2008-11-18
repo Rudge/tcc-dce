@@ -46,15 +46,15 @@ public class ControladorServlet extends HttpServlet {
 			
 		} catch (ClassNotFoundException e) {
 			request.setAttribute("msgErro", "A implementação causou uma exceção");
-			throw new ServletException("Não encontro a classe " + acaoClasse);
+			throw new ServletException("Não encontrou a classe " + acaoClasse);
 		}catch (DceException e){
 			request.setAttribute("msgErro", e.getMessage());
 			if(request.getSession().getAttribute("usuario") != null){
 				request.setAttribute("acao", acao);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/erro.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.PAGINA_ERRO);
 				dispatcher.forward(request, response);
 			}else{
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.PAGINA_INDEX);
 				dispatcher.forward(request, response);
 			}
 		}catch (Exception e) {

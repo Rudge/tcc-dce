@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.unisa.tcc.form.AlunoForm;
 import com.unisa.tcc.form.ChamadaForm;
+import com.unisa.tcc.propriedades.Constantes;
 import com.unisa.tcc.propriedades.DceException;
 import com.unisa.tcc.to.AlunoTo;
 
@@ -38,7 +39,7 @@ public class RealizarChamadaAction implements InterfaceActionNegocio{
 				request.setAttribute("chamada", chamada);
 			}
 			request.getSession().setAttribute("listaAlunos", listaAlunosForm);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/webpages/realizarChamada.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.PAGINA_REALIZAR_CHAMADA);
 			dispatcher.forward(request, response);
 			
 		}catch(Exception e){
