@@ -15,6 +15,7 @@ public class SairAction implements InterfaceActionNegocio {
 		try{
 			request.getSession().invalidate();
 			request.getSession(false);
+			request.setAttribute("msgErro", "Logoff efetuado com sucesso!");
 			RequestDispatcher dispatcher = request.getRequestDispatcher(Constantes.PAGINA_INDEX);
 			dispatcher.forward(request, response);
 		}catch (Exception e) {

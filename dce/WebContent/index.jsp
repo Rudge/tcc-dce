@@ -29,7 +29,7 @@
                     	<option value="administrador">Administrador</option>
                   	</select>
                   	<input OnClick="ok()" class="botao" type="button" value="OK"/>
-                  	<input OnClick="lembrarSenha()" class="botao" type="button" value="Lembrar Senha?"/>
+                  	<input OnClick="recuperarSenha()" class="botao" type="button" value="Esqueceu Senha?"/>
 					<input type="hidden" name="acao" value=""/>
 				</form>
         	</div>

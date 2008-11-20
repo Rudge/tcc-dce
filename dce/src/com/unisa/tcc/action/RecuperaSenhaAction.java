@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.unisa.tcc.propriedades.DceException;
 
-public class LembraSenhaAction implements InterfaceActionNegocio {
+public class RecuperaSenhaAction implements InterfaceActionNegocio {
 	
 	public void executar(HttpServletRequest request, HttpServletResponse response) throws DceException {
 		// TODO Auto-generated method stub
