@@ -1,9 +1,9 @@
-function lembrarSenha(){
+function recuperarSenha(){
 	if(document.getElementById("usuario").value == ""){
 		alert("Por favor, preencha o campo do usuário!!");
 		document.getElementById("usuario").focus();
 	}else{
-		document.getElementById("formLogin").acao.value = "LembraSenhaAction";
+		document.getElementById("formLogin").acao.value = "RecuperaSenhaAction";
 		document.formLogin.submit();
 	}
 }
