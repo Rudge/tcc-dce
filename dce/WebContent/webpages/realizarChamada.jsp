@@ -72,9 +72,9 @@
 						int corLinha = 0;
 					%>
 						<tr>
-							<th>Presença</th>
 							<th>Matricula</th>
 							<th>Nome</th>
+							<th>Presença</th>
 					   </tr>
 					   <% for (AlunoForm aluno : listaAlunos) {
 					   	if(corLinha % 2 == 0){
@@ -83,10 +83,13 @@
 						<%}else{%>
 						<tr>
 						<%}%>
-							<td>SIM<input type="radio" id="<%=aluno.getMatricula()%>presenca" name="chamada<%=aluno.getMatricula()%>" value="true"/>
-							NÃO<input type="radio" id="<%=aluno.getMatricula()%>falta" name="chamada<%=aluno.getMatricula()%>" value="false"/></td>
-						<%
-							if(aluno.isPresenca()){ %>
+							<td><%=aluno.getMatricula()%></td>
+							<td><%=aluno.getNome()%></td>
+							<td>
+								<input type="radio" id="<%=aluno.getMatricula()%>presenca" name="chamada<%=aluno.getMatricula()%>" value="true"/>SIM
+								<input type="radio" id="<%=aluno.getMatricula()%>falta" name="chamada<%=aluno.getMatricula()%>" value="false"/>NÃO
+							</td>
+						<%if(aluno.isPresenca()){ %>
 								<script>
 									marcarOpcaoRadio(<%=aluno.getMatricula()%> + "presenca");
 								</script>	
@@ -102,8 +105,6 @@
 									desabilitarOpcaoRadio(<%=aluno.getMatricula()%>);
 								</script>
 						<%	} %>
-							<td><%=aluno.getMatricula()%></td>
-							<td><%=aluno.getNome()%></td>
 						</tr>
 					  <% corLinha++;
 					   }
