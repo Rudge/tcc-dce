@@ -49,7 +49,7 @@
         </div>
         <div id="principal">
 			<form id="formChamada" name="formChamada" method="post" action="dce.do">
-				<span id="sair" style="width:365px;">
+				<span id="sair" style="width:330px;">
 					<a onclick="sair()" href="#"><img style="float: right; border:0;" alt="SAIR" src="imagens/sair.jpg"/></a>
 				</span>
 				<input type="hidden" name="acao" value=""/>
